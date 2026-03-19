@@ -1,0 +1,13 @@
+Horny {
+    name "Horny"
+    desc "Has a chance to be charmed when hit."
+    class Disorder
+
+    passives {
+        StatusOnTookDamage {
+            chance 15%
+            Charmed 1
+            
+        }
+    }
+}

@@ -1,0 +1,118 @@
+//todo: add some of the existing legendary items in here (Mjolnir and such)
+
+//unique legendary items (ones you get from specific in game events)
+TinksBow {
+    name "ARMOR_TINKSBOW_NAME"
+    desc "ARMOR_TINKSBOW_DESC"
+    rarity very_rare
+    kind head
+    frame 113
+    degrade_after_adventure false
+}
+
+
+
+//general legendary items (once you can get only once, if an event rewards a "legendary item")
+
+GuillotinaCollar {
+	name "Guillotina's Collar"
+    desc "Guillotina aids you on your journy. she actually tries."
+    kind trinket
+    frame 556
+    rarity legendary
+    /indestructible true
+	set [Used Tina]
+
+    global_tags [guillotina_following]
+
+    passives {
+        SpawnItemLinkedFamiliar {
+            object GuillotinaFamiliar
+            //break_on_pop_only true
+        }
+    }
+}
+
+GambitsCollar {
+	name "Gambit's Collar"
+    desc "Gambit follows you. He's here for fun"
+    kind trinket
+    frame 557
+    rarity legendary
+    /indestructible true
+	set Used
+
+    global_tags [gambit_following]
+
+    passives {
+        SpawnItemLinkedFamiliar {
+            object GambitFamiliar
+            //break_on_pop_only true
+        }
+    }
+}
+
+DravensCollar {
+	name "Draven's Collar"
+    desc "A buffed verison of Draven aids you on your journy"
+    kind trinket
+    frame 558
+    rarity legendary
+    /indestructible true
+	set Used
+
+    global_tags [draven_following]
+
+    passives {
+        SpawnItemLinkedFamiliar {
+            object DruidCrowFamiliar
+            //break_on_pop_only true
+        }
+        SpawnItemLinkedFamiliar {
+            object DruidCrowFamiliar
+            //break_on_pop_only true
+        }
+        SpawnItemLinkedFamiliar {
+            object DruidCatFamiliar
+            //break_on_pop_only true
+        }
+    }
+}
+
+MarshmallowsCollar {
+	name "Marshmallow's Collar"
+    desc "A buffed verison of Marshmallow aids you on your journey"
+    kind trinket
+    frame 559
+    rarity legendary
+    /indestructible true
+	set Used
+
+    global_tags [marshmallow_following]
+
+    passives {
+        SpawnItemLinkedFamiliar {
+            object MedicCatFamiliar
+            //break_on_pop_only true
+        }
+    }
+}
+
+MageCatCollar {
+	name "Lucy's Collar"
+    desc "A buffed version of lucy aids you on your journey"
+    kind trinket
+    frame 561
+    rarity legendary
+    /indestructible true
+	set Used
+
+    global_tags [lucy_following]
+
+    passives {
+        SpawnItemLinkedFamiliar {
+            object MageCatFamiliar
+            //break_on_pop_only true
+        }
+    }
+}

@@ -1,0 +1,113 @@
+KinddyShark {
+    variant_of DaddyShark
+    graphics {
+        movieclip DaddyShark
+        name "KinddyShark"
+        uifloaters_offset 1.5
+        shadow_size 2
+        water_mask medmed
+
+        tooltip "Will try to eat any enemy it reaches. Gains extra turns for each bleeding unit."
+        show_infinity_damage_warning true
+        tint [1 0.5 1 1]
+    }
+
+    stats {
+        strength 5
+        dexterity 5
+        constitution 5
+        intelligence 5
+        speed 1
+        charisma 5
+    }
+    
+    properties {
+        tag [cat fish]
+        health 30
+        movement 2
+        faction allies
+        inherit_faction true
+
+        size 2x2
+        move_block everything_even_when_dead
+       
+    }
+
+    abilities {
+        move DefaultMove
+        attack DaddyHungry
+
+        spells [
+            Magnetize
+        ]
+    }
+
+    passives {
+        Trample 3
+        SharkySmellsBlood 1
+        CaptureFamiliar 1
+    }
+    
+    ai {
+        brain GenericBrain
+        decision_weights simple
+        move_weights stay_close
+    }
+}
+
+kinddyShark {
+    variant_of DaddyShark
+    graphics {
+        movieclip DaddyShark
+        name "kinddyShark"
+        uifloaters_offset 1.5
+        shadow_size 2
+        water_mask medmed
+
+        tooltip "Will try to eat any enemy it reaches. Gains extra turns for each bleeding unit."
+        show_infinity_damage_warning true
+        tint [1 0.5 1 1]
+    }
+
+    stats {
+        strength 5
+        dexterity 5
+        constitution 5
+        intelligence 5
+        speed 1
+        charisma 5
+    }
+    
+    properties {
+        tag [cat fish]
+        health 30
+        movement 2
+        faction allies
+        inherit_faction true
+
+        size 2x2
+        move_block everything_even_when_dead
+       
+    }
+
+    abilities {
+        move DefaultMove
+        attack DaddyHungry
+
+        spells [
+            Magnetize
+        ]
+    }
+
+    passives {
+        Trample 3
+        SharkySmellsBlood 1
+        CaptureFamiliar 1
+    }
+    
+    ai {
+        brain GenericBrain
+        decision_weights simple
+        move_weights stay_close
+    }
+}
