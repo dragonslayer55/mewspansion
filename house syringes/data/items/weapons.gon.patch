@@ -474,7 +474,10 @@ TinkererLog {
     variant_of Log
     durability 4
 }
-
+TinkererLog2 {
+    variant_of Log
+    durability 10
+}
 Taser {
     name "ITEM_TASER_NAME"
     desc "ITEM_TASER_DESC"
@@ -2565,4 +2568,88 @@ Probe {
 	set Space
 	
 	ability wp_Probe
+}
+HugeBomb {
+    name "Huge Bomb"
+    desc "A bomb with huge range and damage"
+    rarity rare
+    kind weapon
+    frame 11
+    durability 1
+    
+    ability wp_HugeBomb
+}
+MassiveBomb {
+    name "Massive Bomb"
+    desc "A bomb with a massive range and damage"
+    rarity rare
+    kind weapon
+    frame 11
+    durability 1
+    
+    ability wp_MassiveBomb
+}
+TinkererShotgun {
+    name "ITEM_SHOTGUN_NAME"
+    desc "ITEM_SHOTGUN_DESC"
+    rarity very_rare
+    kind weapon
+    frame 50
+    durability 5
+
+    ability wp_Shotgun2
+}
+
+TinkererUzi {
+    name "ITEM_UZI_NAME"
+    desc "ITEM_UZI_DESC"
+    rarity rare
+    kind weapon
+    frame 137
+    durability 6
+
+    ability wp_Uzi2
+}
+
+Tinkerer22Rifle {
+    name "ITEM_22RIFLE_NAME"
+    desc "ITEM_22RIFLE_DESC"
+    rarity rare
+    kind weapon
+    frame 152
+    durability [3 8]
+
+    ability wp_22Rifle2
+}
+TinkererRocketLauncher {
+    name "ITEM_ROCKETLAUNCHER_NAME"
+    desc "ITEM_ROCKETLAUNCHER_DESC"
+    kind weapon
+    rarity very_rare
+    frame 160
+    durability 7
+
+    ability wp_RocketLauncher2
+}
+TinkererTeslaCannon { //this is a Tinkerer Tech 3 item
+    name "ITEM_TESLACANNON_NAME"
+    desc "ITEM_TESLACANNON_DESC"
+    rarity very_rare
+    kind weapon
+    frame 185
+    durability 2
+	set Experimental
+
+    ability wp_TeslaCannon2
+}
+
+TinkererSniper {
+    name "ITEM_SNIPERRIFLE_NAME"
+    desc "ITEM_SNIPERRIFLE_DESC"
+    rarity very_rare
+    kind weapon
+    frame 52
+    durability [1 2]
+
+    ability wp_Sniper2
 }

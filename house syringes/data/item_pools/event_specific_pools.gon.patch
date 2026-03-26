@@ -200,6 +200,7 @@ demon_themed_items [
 	DemonicMask
 	DemonicNecklace
 	DarkFriend
+	DybbuksMark
 ]
 
 grub_armor [
@@ -477,6 +478,8 @@ collars_items [
 	RadCollar
 	MageCatCollar
 	CorruptCollar
+	TinkererCollar
+	NecroCollar
 ]
 
 //unused cycle of usable trinkets that turn you into a class 

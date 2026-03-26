@@ -9586,3 +9586,349 @@ tk_Glitch {
         }
     }
 }
+
+tk_CC {
+    template spawn
+
+    meta {
+        name "{itemname}"
+    }
+
+    tags [summon]
+    
+    graphics {
+        lob true
+        animation showTrinket
+    }
+    
+    cost {
+        mana 0
+        cantrip true
+		once_per_fight true
+        must_not_be_a_summon true
+    }
+    
+    target {
+        min_range 3
+        max_range 999
+        max_aoe 0
+
+        //range_excludes_blocking false
+        //restrictions aoe_must_exist
+    }
+
+    spawn {
+        object PlayerCat_Buffed
+        
+        catdata item_aux_catid
+        clone_items true
+
+        additional_passives {
+            InjuryImmunity 1
+        }
+    }
+}
+
+wp_HugeBomb {
+    template spell
+
+    meta {
+        name "{itemname}"
+    }
+
+    tags [weapon_throw]
+    
+    cost {
+        mana 0
+        cantrip true
+    }
+
+    target {
+        min_range 1
+        max_range 5+bonus_range
+
+        min_aoe 0
+        max_aoe 3
+    }
+
+    graphics {
+        animation weaponthrowhigh
+        use_projectile true
+        projectile source_weapon
+
+        particle Explosion
+        delay 1
+    }
+    
+    damage_instance {
+        damage 15
+        knockback 2
+        elements [
+            Fire
+            Explosion
+        ]
+    }
+}
+
+wp_MassiveBomb {
+    template spell
+
+    meta {
+        name "{itemname}"
+    }
+
+    tags [weapon_throw]
+    
+    cost {
+        mana 0
+        cantrip true
+    }
+
+    target {
+        min_range 1
+        max_range 6+bonus_range
+
+        min_aoe 0
+        max_aoe 4
+    }
+
+    graphics {
+        animation weaponthrowhigh
+        use_projectile true
+        projectile source_weapon
+
+        particle Explosion
+        delay 1
+    }
+    
+    damage_instance {
+        damage 25
+        knockback 10
+        elements [
+            Fire
+            Explosion
+        ]
+    }
+}
+
+wp_Shotgun2 {
+    template straightshot_attack
+
+    meta {
+        name "{itemname}"
+    }
+    
+    cost {
+        mana 0
+        cantrip true
+    }
+
+    target {
+        target_mode direction
+        max_aoe 3+bonus_range
+        shotgun_mode true
+
+        aoe_mode custom
+        custom_aoe [[3, -2][3, -1][3, 0][3, 1][3, 2]]
+    }
+
+    graphics {
+        projectile Bullet
+        animation weaponshoot
+        lob_height 0
+        speed 25
+    }
+
+    self_damage {
+        damage 0
+        knockback 1
+        effects {
+            KnockbackDirectionIsFacingDirection flip
+        }
+    }
+    
+    damage_instance {
+        damage 7
+    }
+}
+wp_Uzi2 {
+    template straightshot_attack
+
+    meta {
+        name "{itemname}"
+    }
+
+    graphics {
+        projectile Bullet
+        animation uziShoot
+        speed 25
+    }
+    
+    cost {
+        mana 0
+        cantrip true
+    }
+
+
+    target {
+        multihit 5
+    }
+
+    /*temporary_effects {
+        CastAgain 4
+    }*/
+    
+    damage_instance {
+        damage 3
+    }
+}
+
+wp_22Rifle2 {
+    template lobbed_attack
+
+    meta {
+        name "{itemname}"
+    }
+    
+    cost {
+        mana 0
+        cantrip true
+    }
+
+    target {
+        max_range 20
+        min_range 1
+    }
+
+    graphics {
+        projectile Bullet
+        animation weaponshoot
+        lob_height 0
+        speed 25
+    }
+    
+    damage_instance {
+        damage 16
+    }
+}
+
+wp_RocketLauncher2 {
+    template spell
+
+    meta {
+        name "{itemname}"
+    }
+
+    cost {
+        mana 0
+        cantrip true
+    }
+
+    target {
+        min_range 1
+        max_range 20
+
+        min_aoe 0
+        max_aoe 4
+    }
+
+    graphics {
+        animation weaponshoot
+        use_projectile true
+        projectile Projectile_Rocket
+
+        rocket_swirl {
+            speed [1.5, 2.5] //random range of rotations per second
+            radius [.5 1]
+        }
+        easing 1 // ease in
+
+        lob_height 5
+
+        particle Explosion
+    }
+    
+    damage_instance {
+        damage 15
+        knockback 1
+        elements [
+            Fire
+            Explosion
+        ]
+    }
+}
+
+wp_TeslaCannon2 {
+    template straightshot_attack
+    
+    meta {
+        name "{itemname}"
+    }
+
+    graphics {
+        animation weaponshoot
+        projectile LightningBallProjectile
+    }
+
+    sounds {
+        ontrigger SE_WeaponShoot_TeslaCannon
+    }
+
+    cost {
+        mana 0
+        cantrip true
+    }
+
+    target {
+        min_range 1
+        max_range 10
+        restrictions none
+        upgrade_straight_shot_to_piercing true
+    }
+
+    damage_instance {
+        damage 15
+
+        effects {
+            Stun [1 .75]
+        }
+
+        elements [
+            Electric
+        ]
+    }
+}
+
+wp_Sniper2 {
+    template lobbed_attack
+
+    meta {
+        name "{itemname}"
+    }
+    
+    cost {
+        mana 0
+        cantrip true
+    }
+
+    target {
+        max_range 20
+        min_range 1
+    }
+
+    graphics {
+        projectile Bullet
+        animation weaponshoot
+        lob_height 0
+        speed 25
+    }
+    
+    
+    damage_instance {
+        damage 1
+
+        effects {
+            Instakill 50
+        }
+    }
+}

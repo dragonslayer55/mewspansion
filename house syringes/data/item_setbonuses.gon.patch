@@ -414,7 +414,7 @@ Fighter {
     desc "SETBONUS_FIGHTER_DESC"
     pieces_required 3
     
-    shield 4
+    shield 4 
 
     passives {
         StatusOnKill {

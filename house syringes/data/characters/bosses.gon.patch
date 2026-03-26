@@ -2986,6 +2986,7 @@ Dybbuk {
 		BossRewards {
 			common CoffinArmor
 			rare DybbuksRib
+            very_rare DybbuksMark
 		}
 
         FormChanger {
@@ -3911,5 +3912,152 @@ BomberRatFamiliar {
         
         fallback_advances_pattern true
         stun_advances_pattern false
+    }
+}
+
+DybbukFamilliar {
+    graphics {
+        movieclip Dybbuk
+        name "ENEMY_DYBBUK_NAME"
+        no_splatter true
+		scale 1.1
+		tooltip "ENEMY_DYBBUK_DESC"
+    }
+
+    stats {
+        strength  10
+        dexterity 10
+        constitution 10
+        intelligence 10
+        speed 10
+        charisma 10
+    }
+    
+    properties {
+        tag [cat ghost]
+        faction allies
+        type boss
+        inherit_faction true
+        health 100
+
+        movement 6
+
+        dispersed_bonus_turns 2
+        corpse_health 0
+        banned_elite_buffs [Twin, BloodFrenzy, Mad]
+    }
+
+    abilities {
+        move DefaultMove
+        attack DybbukLick
+        
+        spells [
+            DybbukWispsAlt
+            DybbukReanimate
+            DybbukEscape
+
+
+            DybbukPossessAlt
+            DybbukReturn
+            DybbukRePossess
+        ]
+    }
+
+    passives {
+        Dybbuk1HPTracker 1
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+		
+		BossRewards {
+			common CoffinArmor
+			rare DybbuksRib
+		}
+
+        FormChanger {
+            Default {
+
+                passives {
+                    SurviveAt1HP 1
+
+                    AbilityHealthThreshold {
+                        even_if_stunned true
+                        threshold 1
+                        ability DybbukPossessAlt
+                        use_ai true
+                    }
+
+                }
+            }
+            Possessing {
+                animation_suffix "Possessing"
+
+                turns {
+                    takes_turns false
+                }
+
+                passives {
+                    SurviveAt1HP 1
+                }
+            }
+            LastHit {
+                turns {
+                    takes_turns true
+                    dispersed_bonus_turns 2
+                }
+            }
+            Bully {
+                turns {
+                    takes_turns true
+                }
+
+                passives {
+                    AddInitiative -9999
+                }
+
+                ai {
+                    brain PatternBrain
+
+                    virtual_abilities {
+                        Escape {
+                            ability DybbukEscape
+                            move_weights keep_distance_always_move
+                        }
+                    }
+
+                    pattern {
+                        do_all_shuffle [attack DybbukWispsAlt DybbukRePossess]
+                    }
+
+                    decision_weights default
+                    move_weights keep_distance
+                }
+            }
+        }
+
+
+        ChanceToBackflip {
+            chance 100%
+            ability DybbukBackflipDodge
+        }
+        Undead 1
+    }
+    
+    ai {
+        brain PatternBrain
+
+        virtual_abilities {
+            Escape {
+                ability DybbukEscape
+                move_weights keep_distance_always_move
+            }
+        }
+
+        pattern {
+            do_random [Escape attack DybbukReanimate]
+            do_random [Escape attack DybbukReanimate DybbukWispsAlt]
+        }
+
+        decision_weights default
+        move_weights keep_distance
     }
 }

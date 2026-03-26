@@ -903,6 +903,7 @@ TinkererCat {
         
         spells [
             TCMechSuit
+            AltTCCatBot
             TCCatBot
         ]
     }
@@ -911,6 +912,22 @@ TinkererCat {
 
         FormChanger {
             Default {
+                Conditional_HasStatus {
+                    status CaptureFamiliar
+
+
+                    ai {
+                        brain PatternBrain
+
+                        pattern {
+                            do_all [weapon *attack weapon attack move]
+                            do_all [*AltTCCatBot weapon *attack weapon attack move]
+                        }
+
+                        decision_weights default
+                        move_weights keep_distance
+                    }
+                 }
             }
             DesireMech {
                 ai {
@@ -2522,12 +2539,265 @@ MageCatFamiliar {
             do_strict [MCStorm]
             do_strict [HyperBeam3]
             do_strict [MegaBlast3]
-            do_all [Warp2, MageTeleport2, MageSwap2, Absorb2, ChainLightning3]
+            do_priority [Warp2, MageTeleport2, MageSwap2, Absorb2, ChainLightning3]
         }
 
         decision_weights always_cast
         move_weights keep_distance_always_move
         fallback_advances_pattern true
         stun_advances_pattern false
+    }
+}
+TinkererCatFamiliar {
+    graphics {
+        movieclip _CAT
+        name "ENEMY_FRANKLIN_NAME"
+        custom_cat_data TinkererCat
+		tooltip "ENEMY_FRANKLIN_DESC"
+    }
+
+    equipment {
+        head TinkererHat
+    }
+
+    stats {
+        strength 10
+        dexterity 10
+        constitution 10
+        intelligence 10
+        speed 10
+        charisma 10
+    }
+    
+    properties {
+        tag cat
+        faction allies
+        type boss
+        health 90
+		shield 400
+        dispersed_bonus_turns 1
+        
+        
+        mana 200
+        mana_regen 10
+        initial_mana 10
+        mana_matters true*/
+
+        banned_elite_buffs [BloodFrenzy Mad]
+
+        inherit_faction true
+        weak_threshold 25
+        corpse_health indestructible
+        mana_matters true
+        can_be_overkilled false 
+        can_collect_coins true
+        can_eat_food true
+    }
+
+    abilities {
+        move DefaultMove
+        attack BasicMelee
+        
+        spells [
+            TCMechSuit2
+            AltTCCatBot
+            TCCatBot
+            Research2
+            NurseBot
+            BatteryNuke2
+            RefineMaterials
+        ]
+    }
+
+    passives {
+        AddWeaponScaling 1
+        WeaponCountsAsBasicAttack 1
+        ExtraWeaponAttacks 1
+        Tech 1
+        MinimumTech 1
+        LightningRod 1
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+
+        FormChanger {
+            Default {
+            }
+            DesireMech {
+                ai {
+                    brain PatternBrain
+
+                    pattern {
+                        do_priority [*TCMechSuit2 TCMechSuit2]
+                    }
+                    decision_weights default
+                    move_weights keep_distance
+                }
+            }
+        }
+
+        FormChangeHealthThreshold {
+            threshold 25
+            count_shield true
+            form_below DesireMech
+            form_above Default
+        }
+
+        TinkererBasicAttackSwitching {
+            craft_ability TinkererCraft
+            throw_ability TinkererThrow
+        }
+    }
+    
+    ai {
+        brain PatternBrain
+
+        pattern {
+            do_all [weapon *attack weapon attack move]
+            do_all [*AltTCCatBot weapon *attack weapon attack move]
+            do_random [Research2, NurseBot, BatteryNuke2, RefineMaterials]
+        }
+
+        decision_weights default
+        move_weights keep_distance
+    }
+}
+TCMechSuit2 {
+    variant_of MechSuit
+
+    stats {
+        strength 8
+        dexterity 6
+        constitution 10
+        intelligence 10
+        speed 10
+        charisma 10
+    }
+
+    passives {
+        AllSpellsCostActPoints 1
+        SetSpellCosts 0
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+    }
+
+    abilities {
+        move DefaultMove
+        attack MechSuitPunch
+        
+        spells [
+            MechSuitBarrage
+            MechSuitDash
+            MechSuitEject
+            wp_RocketLauncher2
+        ]
+    }
+}
+
+NecroCatFamiliar {
+    graphics {
+        movieclip _CAT
+        name "ENEMY_MORANA_NAME"
+        custom_cat_data NecroCat
+		tooltip "ENEMY_MORANA_DESC"
+    }
+
+    equipment {
+        face NecromancerMask
+    }
+
+    stats {
+        strength 10
+        dexterity 10
+        constitution 10
+        intelligence 10
+        speed 10
+        charisma 10
+    }
+    
+    properties {
+        tag cat
+        faction allies
+        type boss
+        health 150
+        dispersed_bonus_turns 1
+        round_end_bonus_turns 1
+
+        mana 50
+        mana_regen 5
+        initial_mana 4
+        mana_matters true*/
+
+        banned_elite_buffs [BloodFrenzy Mad]
+
+        inherit_faction true
+        weak_threshold 50
+        corpse_health indestructible
+        mana_matters true
+        can_be_overkilled false 
+        can_collect_coins true
+        can_eat_food true
+    }
+
+    abilities {
+        move DefaultMove
+        attack BasicNecroRanged
+        
+        spells [
+            //NCReanimate
+            AnimateDead2
+            NCGravecrawl
+            Reap2
+            Haunt
+            SoulLink2
+            CarrionShot2
+            LifeDrain2
+        ]
+    }
+
+    passives {
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+        AddStatusToBasicAttack {
+                Leech 1
+                SoulLink 1
+        }
+        AddStatusToSpells {
+                LeechPercent 50
+                SoulLink 1
+        }
+        AddStatusToWeapons {
+                LeechPercent 50
+                SoulLink 1
+        }
+        NoReflection 1
+
+        InfiniteRebirth {
+            health 50%
+            //playercat_health 0%
+            immediate true
+        }
+        ImmortalLeeches 2
+        SpreadExtraDebuffs 3
+    }
+    
+    ai {
+        brain PatternBrain
+
+        virtual_abilities {
+            NCGravecrawlFAR {
+                ability NCGravecrawl
+                move_weights stay_far
+            }
+        }
+
+        pattern {
+            do_all [attack]
+        }
+        round_end_bonusturn_pattern {
+            do_priority [NCGravecrawlFAR, AnimateDead2, Reap2, Haunt, SoulLink2, CarrionShot2, LifeDrain2]
+        }
+
+        decision_weights default
+        move_weights keep_distance
     }
 }

@@ -1,0 +1,271 @@
+STARTER_PLACEHOLDER_Swordsman {
+    template placeholder
+    
+    meta {
+        name "Swordsman ability placeholder"
+        desc "Swordsman ability placeholder"
+        class Swordsman
+    }
+}
+
+FlyingSlash {
+    template ranged_attack
+    
+    meta {
+        name "Flying Slash"
+        desc "A low damage long ranged attack that inflicts bleed 3 and bruise 1"
+        class Swordsman
+    }
+
+    cost {
+        mana 10
+        infcantrip true
+    }
+
+    graphics {
+        animation weaponswing
+    }
+
+    target {
+        min_range 0
+        max_range 1
+        aoe_mode custom
+        custom_aoe [
+                     [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1],
+                     [0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0],
+                     [0,-1], [1,-1], [2,-1], [3,-1], [4,-1], [5, -1], [6, -1], [7, -1],
+                   ]
+        //restrictions aoe_must_exist
+        knockback_mode orientation
+    }
+
+    damage_instance {
+        damage 3+bonus_melee_damage
+        //knockback 1
+        incidentally_collects_pickups false
+        effects {
+            Bruise 1
+            Bleed 3
+        }
+    }
+}
+FlyingSlash2 {
+    variant_of FlyingSlash
+    
+    meta {
+        desc "A low damage long ranged attack that inflicts bleed 3 and bruise 1 (this cost less)"
+    }
+
+    cost {
+        mana 3
+    }
+
+
+    target {
+        min_range 0
+        max_range 1
+        aoe_mode custom
+        custom_aoe [
+                     [0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1],
+                     [0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 1], [9, 1], [10, 1],
+                     [0,-1], [1,-1], [2,-1], [3,-1], [4,-1], [5,-1], [6,-1], [7,-1], [8,-1], [9,-1], [10,-1],
+                   ]
+        //restrictions aoe_must_exist
+        knockback_mode orientation
+    }
+
+}
+
+ShearingSwing {
+    template spell
+    
+    meta {
+        name "Shearing Swing"
+        desc "A area swing that knocks back units."
+        class Swordsman
+        type_icon "defense"
+    }
+
+    graphics {
+        //particle fx_windSpell
+        start spinattackstart
+        loop spinattackloop
+        end spinattackend
+    }
+    
+    cost {
+        infcantrip true
+        mana 5
+    }
+    
+    target {
+        target_mode none
+        aoe_mode standard
+        min_aoe 1
+        max_aoe 1
+
+        aoe_considers_character_size true
+        aoe_excludes_self true
+
+    }
+    
+    damage_instance {
+        damage 0
+        knockback 2
+
+        effects {
+            CollectsPickups 1
+        }
+
+    }
+}
+ShearingSwing2 {
+    variant_of ShearingSwing
+
+    meta {
+        desc "A area swing that deals damage knocks back units and has a chance to inflict bruise and bleed."
+    }
+
+    damage_instance {
+        damage 4
+        knockback 2
+
+        effects {
+            Bleed {
+                chance .15
+            }
+            Bruise {
+                chance .15
+            }
+        }
+
+    }
+}
+
+DashSlash {
+    template dash_attack
+    
+    meta {
+        name "Dash"
+        desc "A dash attack that can inflict bleed"
+        class Swordsman
+    }
+    
+    graphics {
+        dash_start_animation dashstart
+        dash_animation dash
+        //dash_end_animation dashend
+        dash_attack_animation dashatk
+    }
+
+    sounds { 
+        ontrigger SE_BullRushDash 
+    } 
+    
+    cost {
+        infcantrip true
+        mana 7
+    }
+    
+    target {
+
+    }
+    
+    damage_instance {
+        damage 3+bonus_melee_ability_damage
+        Bleed {
+            chance 0.25
+        }
+        //knockback 1
+    }
+}
+DashSlash2 {
+    variant_of DashSlash
+
+    meta {
+        desc "A dash attack that inflicts bleed and bruise."
+    }
+
+    
+
+    damage_instance {
+        Bleed 1
+        Bruise 1
+        //knockback 1
+    }
+}
+
+Medi {
+    template self_buff
+
+    meta {
+        name "Meditate"
+        desc "Gain +2 charge"
+        class Swordsman
+        type_icon "buff"
+    }
+    graphics {
+        animation pray
+        particle fx_statup
+    }
+    
+    cost {
+        mana 3
+        infcantrip true
+    }
+
+    
+    target {
+        //target_mode none
+        max_range 0
+        min_range 0
+    }
+
+    damage_instance {
+        heal 0
+        
+        effects {
+            Charge 2
+        }
+
+    }
+}
+Medi2 {
+    variant_of Medi
+
+    meta {
+        name "Meditate"
+        desc "Give +4 charge and heal 4 to units in range"
+        class Swordsman
+        type_icon "buff"
+    }
+    graphics {
+        animation pray
+        particle fx_statup
+    }
+    
+    cost {
+        mana 3
+        infcantrip true
+    }
+
+    
+    target {
+        //target_mode none
+        min_aoe 0
+        max_aoe 1
+        min_range 0
+        max_range 0
+    }
+
+    damage_instance {
+        heal 4
+        type spell
+        incidentally_collects_pickups false
+        
+        effects {
+            Charge 4
+        }
+
+    }
+}

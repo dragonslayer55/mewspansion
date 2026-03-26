@@ -1,0 +1,78 @@
+
+STARTER_PLACEHOLDER_Swordsman {
+
+    name "Swordsman passive placeholder"
+    desc "Swordsman passive placeholder"
+    class Swordsman
+
+}
+
+Ready {
+    name "Prepared"
+    desc "Start battle with a counter and preimptive counter"
+    class Swordsman
+
+    1 {
+        passives {
+            StatusOnBattleStart {
+                TempCounterAttack 1
+                TempPreEmptiveCounterAttack 1
+            }
+        }
+    }
+    2 {
+        desc "Start each turn with a counter and preimptive counter"
+        passives {
+            StatusEachTurnBegin {
+                TempCounterAttack 1
+                TempPreEmptiveCounterAttack 1
+            }
+        }
+    }
+}
+
+Sharpen {
+    name "Sharpened blade"
+    desc "amplify the amount of bleed inflicted"
+    class Swordsman
+
+    1 {
+        passives {
+            AmplifyStatus Bleed
+        }
+    }
+    2 {
+        desc "amplify the amount of bleed inflicted basic, attack inflicts bleed 3"
+        passives {
+            AmplifyStatus Bleed
+            AddStatusToBasicAttack {
+                Bleed 3
+                }
+        }
+    }
+}
+
+Blunt {
+    name "Blunt blade"
+    desc "Basic inflict bruise 1"
+    class Swordsman
+
+    1 {
+        passives {
+            AddStatusToBasicAttack {
+                Bruise 1
+                }
+        }
+    }
+    2 {
+        desc "Basic inflict bruise 1 and has a chance to stun"
+        passives {
+            AddStatusToBasicAttack {
+                Bruise 1
+                Stun {
+                    chance 0.1
+                }
+            }
+        }
+    }
+}

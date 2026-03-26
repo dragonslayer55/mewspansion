@@ -2933,8 +2933,10 @@ Unlock_py_za2 {
 Unlock_act1_collars {
 	//beat_house_boss pyrophina_vs_zaratana
 	// complete_chapter_with_class [jurassic Druid]
-	complete_chapter alley
-	required_difficulty 2
+	beat_chapter_boss alley
+	//beat_house_boss guillotina_1
+	require_beat_house_boss guillotina_1
+	required_difficulty 3
 	popup {
 		prompt ITEM_UNLOCK_GENERIC
 		frame UnlockItem
@@ -2946,8 +2948,8 @@ Unlock_act1_collars {
 Unlock_act1_collars2 {
 	//beat_house_boss pyrophina_vs_zaratana
 	// complete_chapter_with_class [jurassic Druid]
-	complete_chapter alley
-	required_difficulty 2
+	beat_chapter_boss alley
+	required_difficulty 3
 	popup {
 		prompt ITEM_UNLOCK_GENERIC
 		frame UnlockItem
@@ -2959,8 +2961,8 @@ Unlock_act1_collars2 {
 Unlock_act1_collars3 {
 	//beat_house_boss pyrophina_vs_zaratana
 	// complete_chapter_with_class [jurassic Druid]
-	complete_chapter alley
-	required_difficulty 2
+	beat_chapter_boss alley
+	required_difficulty 3
 	popup {
 		prompt ITEM_UNLOCK_GENERIC
 		frame UnlockItem
@@ -2973,8 +2975,8 @@ Unlock_act1_collars3 {
 Unlock_act2_collars {
 	//beat_house_boss pyrophina_vs_zaratana
 	// complete_chapter_with_class [jurassic Druid]
-	complete_chapter desert
-	required_difficulty 2
+	beat_chapter_boss desert
+	required_difficulty 3
 	popup {
 		prompt ITEM_UNLOCK_GENERIC
 		frame UnlockItem
@@ -2987,8 +2989,8 @@ Unlock_act2_collars {
 Unlock_act2_collars2 {
 	//beat_house_boss pyrophina_vs_zaratana
 	// complete_chapter_with_class [jurassic Druid]
-	complete_chapter desert
-	required_difficulty 2
+	beat_chapter_boss desert
+	required_difficulty 3
 	popup {
 		prompt ITEM_UNLOCK_GENERIC
 		frame UnlockItem
@@ -2998,16 +3000,44 @@ Unlock_act2_collars2 {
 	
 }
 
+Unlock_act2_collars3 {
+	//beat_house_boss pyrophina_vs_zaratana
+	// complete_chapter_with_class [jurassic Druid]
+	beat_chapter_boss desert
+	required_difficulty 3
+	popup {
+		prompt ITEM_UNLOCK_GENERIC
+		frame UnlockItem
+		immediate true
+	}
+	unlock_item_immediate NecroCollar
+	
+}
+
 Unlock_act3_collars {
 	//beat_house_boss pyrophina_vs_zaratana
 	// complete_chapter_with_class [jurassic Druid]
-	complete_chapter lab
-	required_difficulty 2
+	beat_chapter_boss lab
+	required_difficulty 3
 	popup {
 		prompt ITEM_UNLOCK_GENERIC
 		frame UnlockItem
 		immediate true
 	}
 	unlock_item_immediate DravensCollar
+	
+}
+
+Unlock_act3_collars2 {
+	//beat_house_boss pyrophina_vs_zaratana
+	// complete_chapter_with_class [jurassic Druid]
+	beat_chapter_boss lab
+	required_difficulty 3
+	popup {
+		prompt ITEM_UNLOCK_GENERIC
+		frame UnlockItem
+		immediate true
+	}
+	unlock_item_immediate TinkererCollar
 	
 }

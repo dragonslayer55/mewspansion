@@ -2748,34 +2748,102 @@ CorruptCollar {
     }
 }
 CompleteCollar {
-    name "{aux_cat_name}'s Collar"
-    desc "A buffed copy of {aux_cat_name} aids you on your journey"
+    name "Complete Collar"
+    desc "Summons a buffed copy of {aux_cat_name}"
     rarity very_rare
     kind trinket
     frame 563
     aux -1
     aux_is_catid true
     
-    //ability tk_SoulJar
+    ability tk_CC
+
+    passives {
+        //ForceUseAbility tk_CC
+        //SpawnItemLinkedFamiliar 
+        //SpawnOnBattleStart
+        //SpawnCatCopyOnBattleStart {
+            //object PlayerCat_Buffed
+
+            //catdata item_aux_catid
+            //catdata aux
+            //clone_items true
+
+            //additional_passives {
+                //SafeDoomed 1
+                //AllStatsUp 3
+                //InjuryImmunity 1
+            //}
+            //break_on_pop_only true
+        //}
+    }
+}
+
+
+TinkererCollar {
+	name "Franklin's Collar"
+    desc "A buffed franklin joins you on your battle"
+    kind trinket
+    frame 564
+    rarity legendary
+    /indestructible true
+	set Used
+
+    global_tags [Franklin_following]
 
     passives {
         SpawnItemLinkedFamiliar {
-            object PlayerCat_Buffed
-
-            catdata item_aux_catid
-            clone_items true
-
-            additional_passives {
-                //SafeDoomed 1
-                //AllStatsUp 3
-                InjuryImmunity 1
-            }
+            object TinkererCatFamiliar
             //break_on_pop_only true
         }
     }
 }
 
+NecroCollar {
+	name "Morana's Collar"
+    desc "A buffed Morana joins you on your battle"
+    kind trinket
+    frame 565
+    rarity legendary
+    /indestructible true
+	set Used
 
+    global_tags [Morana_following]
+
+    passives {
+        SpawnItemLinkedFamiliar {
+            object NecroCatFamiliar
+            //break_on_pop_only true
+        }
+    }
+}
+
+DybbuksMark {
+	name "Dybbuk's Mark"
+    desc "All stats down 3 but a buffed Dybbuk follows you"
+    kind trinket
+    frame 566
+    rarity very_rare
+    indestructible true
+    cursed true
+	set Used
+
+    global_tags [Dybbuk_following]
+
+    str -3
+    spd -3
+    dex -3
+    cha -3
+    int -3
+    lck -3 
+    con -3
+    passives {
+        SpawnItemLinkedFamiliar {
+            object DybbukFamilliar
+            //break_on_pop_only true
+        }
+    }
+}
 
 ExpandedPouch {
     name "Expanded Pouch"
@@ -2783,14 +2851,19 @@ ExpandedPouch {
     rarity very_rare
     kind trinket
     frame 230
+    max_durability 10000000000
+    X_is durability
     on_store become_aux_coins
-    aux 100
-    wallet_size 999
+    aux X
 
-    // ability wp_MoneyBag_Huge
+
+    ability wp_MoneyBag_Huge
 
     passives {
         //wallet_size 999
+        StatusOnGainCoins {
+            RepairTrinket 1
+        }
     }
 }
 

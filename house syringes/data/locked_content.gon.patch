@@ -4,6 +4,11 @@ default_unlocked_classes [ //classes are a whitelist instead of a blacklist
 	Hunter
 	Mage
 	Tank
+    Swordsman
+]
+
+default_unlocked_classes.append [ //classes are a whitelist instead of a blacklist
+    Swordsman
 ]
 
 //everything else is a blacklist
@@ -276,6 +281,8 @@ locked_items [
 	MarshmallowsCollar
 	RadCollar
 	MageCatCollar
+    TinkererCollar
+    NecroCollar
 ]
 
 locked_bosses [

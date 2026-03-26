@@ -4,7 +4,7 @@
 TinksBow {
     name "ARMOR_TINKSBOW_NAME"
     desc "ARMOR_TINKSBOW_DESC"
-    rarity very_rare
+    rarity legendary
     kind head
     frame 113
     degrade_after_adventure false

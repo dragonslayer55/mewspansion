@@ -17333,6 +17333,41 @@ TCCatBot {
     }
 }
 
+AltTCCatBot {
+    template spawn
+
+    meta {
+        name "ABILITY_CATBOT_NAME"
+        class Tinkerer
+    }
+
+    tags [summon]
+    
+    graphics {
+        lob true
+        animation tinker
+    }
+    
+    target {
+        min_range 1
+        max_range 1
+        max_aoe 0
+
+        range_excludes_blocking false
+        restrictions aoe_must_exist
+    }
+
+    cost {
+        infcantrip false
+        cantrip true
+        requires_destructible_weapon true
+    }
+
+    spawn {
+        object AltCatbot
+    }
+}
+
 MCMelee {
     template melee_attack
     
@@ -20195,5 +20230,102 @@ BombExplodeSafe {
                 Explosion
             ]
         ai_base_score 9999
+    }
+}
+
+DybbukPossessAlt {
+    template jump_attack
+
+    meta {
+        name "EABILITY_POSSESS_NAME"
+    }
+
+    graphics {
+        full_jump_animation possess
+        full_jump_sync_frames 65
+        full_jump_windup_frames 72 
+    }
+
+    cost {
+        cantrip true
+    }
+
+    target {
+        remain_off_map true
+
+        aoe_excludes_self false
+        max_aoe 0
+        min_aoe 0
+
+        max_range 20
+        restrictions [must_have_cat, must_have_enemy]
+    }
+
+    self_damage {
+        effects {
+            Cleanse 0
+            FormChange Possessing
+        }
+    }
+
+    damage_instance {
+        damage 0
+        cant_miss true
+        type spell
+        makes_contact false
+
+        effects {
+            IgnoreSelf 1
+
+            Conditional_Speculative {
+            } Else { //just dont want the AI considering any of this
+                PurgeAll 1
+                Revive 100%
+                FullHeal 1
+                DybbukPossessed {
+                    exit_ability DybbukReturn
+                    punch_self_ability Dybbuk_StopHittingYourself
+                }
+
+                CatPartsTransform {
+                    //palette 999
+                    mouth 1069
+                    eye1 1069
+                    eye2 1069
+                    eyebrow1 1069
+                    eyebrow2 1070
+                    palette 86
+                }
+            }
+        }
+
+        custom_additional_ai_weight dybbuk_possession
+    }
+}
+
+SpawnWispsAlt {
+    template spawn
+
+    meta {
+        name "EABILITY_SPAWNWISP_NAME"
+    }
+    
+    graphics {
+        lob true
+        animation shoot
+    }
+    
+    cost {
+        cantrip true
+    }
+    
+    target {
+        max_range 2
+    }
+
+    spawn {
+        object WispGood
+        ai_base_score 9999
+        faction self
     }
 }

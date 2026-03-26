@@ -654,6 +654,55 @@ Catbot {
     }
 }
 
+AltCatbot {
+    graphics {
+        movieclip _CAT
+        name "FAMILIAR_CATBOT_NAME"
+        custom_cat_data RoboTom
+        alt_animations[[idle catbotIdle] [walk stompwalk]]
+    }
+
+    stats {
+        strength 5
+        dexterity 5
+        constitution 5
+        intelligence 5
+        speed 5
+        charisma 5
+        luck 5
+    }
+    
+    properties {
+        tag [cat robot]
+        type cat
+        health 10
+        base_mana_regen 999
+        faction allies
+        ai_scale .5
+        //inherit_faction true
+    }
+
+    abilities {
+        move DefaultMove
+        attack None
+        
+        spells [
+
+        ]
+    }
+
+    passives {
+        TakeWeaponFromSpawner 1
+        Robot 1
+    }
+    
+    ai {
+        brain GenericBrain
+        decision_weights default
+        move_weights stay_close
+    }
+}
+
 ZombieCatFamiliar {
     graphics {
         movieclip _CAT

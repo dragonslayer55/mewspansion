@@ -1,0 +1,218 @@
+//tinkerer crafting levels
+tinkerer_0 [ //default
+    //melee
+    TinkererStick
+    TinkererGlassShard
+    PogoStick
+
+    //ranged
+    SmallBomb
+    TinkererBattery
+    Spitball
+
+    //armor
+    JankAlloyHat
+    JankAlloyMask
+    JankAlloyArmor
+
+    //trinket
+    LuckyCoin
+    BrassKnuckles
+    FishHook
+    Teleport
+    
+]
+tinkerer_1 [
+    //melee
+    TinkererBigStick
+    StunGun
+    MiniJetpack
+
+    //ranged
+    TinkererBottles
+    TinkererSlingShot
+    Bomb
+
+    //armor
+    AlloyHat
+    AlloyMask
+    AlloyArmor
+
+    //trinket
+    Conductor
+    MetalSquare
+    TankToy
+]
+tinkerer_2 [
+    //melee
+    TinkererBiggestStick
+    NailBoard
+    BucketOfAcid
+
+    //ranged
+    TinkererTaser
+    TinkererCrossbow
+    Deathbot
+    HugeBomb
+
+    //armor
+    AdvancedAlloyHat
+    AdvancedAlloyMask
+    AdvancedAlloyArmor
+
+    //trinket
+    TinkerTools
+    Natural20
+    Technology
+    LilBattery
+]
+tinkerer_3 [
+    //melee
+    TinkererLog
+
+    //ranged
+    Shotgun
+    22Rifle
+    Uzi
+    RocketLauncher
+    TeslaCannon
+    HugeBomb
+
+    //armor
+    EliteAlloyHat
+    EliteAlloyMask
+    EliteAlloyArmor
+
+    //trinket
+    SelfDestructButton
+    VideoGameCart
+    TV
+    LiquidMetal
+    SkillSplit
+    //PyrophinasCollar2
+    //ZaratanasCollar2
+    //RadCollar
+]
+
+tinkerer_4 [
+    //melee
+    TinkererLog2
+
+    //ranged
+    TinkererShotgun
+    Tinkerer22Rifle
+    TinkererUzi
+    TinkererRocketLauncher
+    TinkererTeslaCannon
+    MassiveBomb
+    TinkererSniper
+
+    //armor
+    EliteAlloyHat
+    EliteAlloyMask
+    EliteAlloyArmor
+
+    //trinket
+    GuillotinaCollar
+    GambitsCollar
+    DravensCollar
+    MarshmallowsCollar
+    MageCatCollar
+]
+
+tinkerer_0_bombs [ //default
+    SmallBomb
+
+    //armor
+    JankAlloyHat
+    JankAlloyMask
+    JankAlloyArmor
+]
+tinkerer_1_bombs [
+    Bomb
+
+    //armor
+    AlloyHat
+    AlloyMask
+    AlloyArmor
+]
+tinkerer_2_bombs [
+    HugeBomb
+
+    //armor
+    AlloyHat
+    AlloyMask
+    AlloyArmor
+]
+tinkerer_3_bombs [
+    MassiveBomb
+
+    //armor
+    AlloyHat
+    AlloyMask
+    AlloyArmor
+]
+
+//these are pools specifically so Tech can interact with them (they're for a fighter Stick! ability)
+stick_0 [
+    TinkererStick
+]
+stick_1 [
+    TinkererBigStick
+]
+stick_2 [
+    TinkererBiggestStick
+]
+stick_3 [
+    TinkererLog
+]
+stick_4 [
+    TinkererLog
+]
+
+allsticks_0 [
+    TinkererStick
+    TinkererBigStick
+    TinkererBiggestStick
+    TinkererLog
+]
+allsticks_1 [
+    TinkererBiggestStick
+    BiggestStick
+    TinkererLog
+]
+allsticks_2 [
+    TinkererBiggestStick
+    TinkererLog
+]
+allsticks_3 [
+    TinkererLog
+]
+
+allsticks_4 [
+    TinkererLog
+]
+
+
+pelts [ //used for hunter CollectPelt
+    CatHideHat
+    CatHideMask
+    CatHideArmor
+]
+
+// used for Fetus in a Jar trinket
+bombs_0 [
+    SmallBomb
+]
+bombs_1 [
+    Bomb
+]
+bombs_2 [
+    HugeBomb
+]
+bombs_3 [
+    MassiveBomb
+]
+bombs_4 [
+    MassiveBomb
+]
