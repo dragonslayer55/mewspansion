@@ -20329,3 +20329,18 @@ SpawnWispsAlt {
         faction self
     }
 }
+TCMechSuit2 {
+    variant_of MechSuit
+
+    damage_instance {
+        ai_base_score 999999
+    }
+
+    cost {
+      //  mana 0
+    }
+
+    spawn {
+        object TCMechSuit2
+    }
+}
