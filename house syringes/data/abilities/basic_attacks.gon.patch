@@ -992,3 +992,37 @@ SwordSlash {
         }
     }
 }
+
+AdvancedExplosiveShot {
+    variant_of BasicExplosiveShot
+    
+    meta {
+        name "Bomb Shot"
+        desc "shot an explosive shot with a random aoe"
+        animate_name false
+    }
+    
+    graphics {
+        animation pukeatk
+        use_projectile true
+        projectile Bomb
+        particle Explosion
+        delay 2
+    }
+
+    target {
+        min_range 3
+        max_range 4+bonus_range
+        X_is random_0_to_N
+        N 3
+        max_aoe X
+    }
+
+    damage_instance {
+        damage (5*X)+bonus_ranged_damage
+        type ranged
+		elements [
+            Explosion
+        ]
+    }
+}

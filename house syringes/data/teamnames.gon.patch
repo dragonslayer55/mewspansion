@@ -1,0 +1,30 @@
+Swordsman.merge {
+	adjectives [
+		"Long"
+        "sharp"
+        "silent"
+        "noble"
+        "bloodthisty"
+        "princess saving"
+        "princess laying"
+        "dragon slaying"
+        "dragon laying"
+        "dragon fucking"
+        
+	]
+	nouns [
+		"Knights"
+		"singular| Knight"
+		"warriors"
+		"singular| warrior"
+        "Merncinaries"
+		"singular| merncinary"
+        "masters"
+		"singular| master"
+        "Kings"
+		"singular| King"
+        "Sensies"
+		"singular| Sensai"
+	]
+}
+

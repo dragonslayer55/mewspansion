@@ -383,6 +383,14 @@ tail {
         }
     }
       
+      1561 { //Turtle Head
+        tag space
+        desc "Immune to charm"
+
+        passives {
+            StatusImmunity [Charmed]
+        }
+    }
 
     900 { //slender
         spd 1

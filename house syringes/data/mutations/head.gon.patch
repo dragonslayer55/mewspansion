@@ -205,7 +205,89 @@ head {
         }
     } 
 	
+    1701 { //auto possess
+        desc "gain possession as a bonus ability. possessed enemies Gain all stats up 5. Keep your turn when possessing but the possessed unit's turn are ai controlled."
+
+        shield 10
+        passives {
+            StatusOnBattleStart {
+			    ConjureBonusAbility PlayerPossess
+		    }
+            StatusEachTurnBegin {
+			    //ConjureBonusAbility PlayerPossess
+                Conditional_InForm {
+                    form Possessing
+
+                    ConjureBonusAbility PlayerReturn
+                } Else {
+                    ConjureBonusAbility PlayerPossess
+                }
+		    }
+        }
+    }
      
+
+    1702 { //auto possess
+        desc "spawn a player controlled mini guillotina at the start of each battle."
+
+        //shield 10
+        con 2
+        passives {
+            SpawnOnBattleStart MiniGuillotinaFamiliar
+            
+            
+        }
+    }
+
+    1703 { //auto possess
+        desc "spawn a player controlled mini pyrophina at the start of each battle"
+
+        //shield 10
+        con 1
+        spd 2
+        passives {
+            SpawnOnBattleStart MiniPyrophinaFamiliar
+        }
+    }
+
+    1704 { //auto possess
+        desc "spawn a player controlled mini zaratana at the start of each battle"
+
+        //shield 10
+        con 4
+        spd -2
+        passives {
+            SpawnOnBattleStart MiniZaratanaFamiliar
+        }
+    }
+
+    1705 { //auto possess
+        desc "spawn a player controlled mini Dybbuk at the start of each battle."
+
+        //shield 10
+        int 2
+        cha 2
+        passives {
+            SpawnOnBattleStart MiniDybbukFamilliar
+        }
+    }
+
+    //1706 { //maybe doesn't work
+        //desc "The adventure is harder"
+
+        //shield 10
+        //int 3
+        //def 3
+        //spd 3
+        //dex 3
+        //str 3
+        //con 3
+        //cha 3
+
+        //global_tags [increase_difficulty]
+
+    //}
+
     //simple stat mod parts
     400 {
         str 2

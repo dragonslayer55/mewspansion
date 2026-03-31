@@ -73,7 +73,6 @@ FlyingSlash2 {
         //restrictions aoe_must_exist
         knockback_mode orientation
     }
-
 }
 
 ShearingSwing {
@@ -267,5 +266,159 @@ Medi2 {
             Charge 4
         }
 
+    }
+}
+
+Gash {
+    template melee_attack
+    
+    meta {
+        name "Gash"
+        desc "A meduim damage attack that inflicts bleed 5"
+        class Swordsman
+    }
+
+    cost {
+        mana 7
+        infcantrip true
+    }
+
+    graphics {
+        animation weaponstab
+    }
+
+    damage_instance {
+        damage 5+bonus_melee_damage
+        //knockback 1
+        incidentally_collects_pickups false
+        effects {
+            Bleed 5
+        }
+    }
+}
+Gash2 {
+    variant_of Gash
+    
+    meta {
+        desc "A high damage attack that inflicts bleed 8"
+    }
+
+    cost {
+        mana 7
+        infcantrip true
+    }
+
+    graphics {
+        animation weaponstab
+    }
+
+    damage_instance {
+        damage 10+bonus_melee_damage
+        //knockback 1
+        incidentally_collects_pickups false
+        effects {
+            Bleed 8
+        }
+    }
+}
+
+KTower {
+    template self_buff
+    
+    meta {
+        name "Knight defense"
+        desc "Swap with your next ally when they're targeted by an attack and gain a Pre Emptive Counter Attack and a normal Counter Attack"
+        class Swordsman
+    }
+
+    cost {
+        mana 7
+        infcantrip true
+    }
+
+    graphics {
+    }
+
+    damage_instance {
+        effects {
+            BodyGuard {
+                stacks 1
+                ability BodyGuardSwapAlt
+            }
+        }
+    }
+}
+KTower2 {
+    variant_of KTower
+    
+    meta {
+        desc "Swap with your next ally when they're targeted by an attack and gain 3 Pre Emptive Counter Attacks 3 normal Counter Attacks and a divine shield"
+    }
+
+    cost {
+        mana 7
+        infcantrip true
+    }
+
+    graphics {
+    }
+
+    damage_instance {
+        effects {
+            BodyGuard {
+                stacks 1
+                ability BodyGuardSwapAlt2
+            }
+        }
+    }
+}
+
+BodyGuardSwapAlt { //util ability for BodyGuard2
+    template swap
+    
+    meta {
+        name "ABILITY_SWAP_NAME"
+        desc "ABILITY_SWAP_DESC"
+        animate_name true
+    }
+
+    graphics {
+        animation_out shadowStepOut
+        animation_in shadowStepIn
+
+        mode yeet //yeet or overlay
+    }
+
+    
+    self_damage {
+        effects {
+            TempCounterAttack 1
+            TempPreEmptiveCounterAttack 1
+        }
+    }
+}
+BodyGuardSwapAlt2 { //util ability for BodyGuard2
+    template swap
+    
+    meta {
+        name "ABILITY_SWAP_NAME"
+        desc "ABILITY_SWAP_DESC"
+        animate_name true
+    }
+
+    graphics {
+        animation_out shadowStepOut
+        animation_in shadowStepIn
+
+        mode yeet //yeet or overlay
+    }
+
+    
+    self_damage {
+        effects {
+            TempCounterAttack 3
+            TempPreEmptiveCounterAttack 3
+            DivineShield 1
+        }
     }
 }

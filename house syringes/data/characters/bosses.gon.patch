@@ -4061,3 +4061,1363 @@ DybbukFamilliar {
         move_weights keep_distance
     }
 }
+// minis
+MiniDybbukFamilliar {
+    graphics {
+        movieclip Dybbuk
+        name "Li'l Dybbuk"
+        no_splatter true
+		scale 0.75
+		tooltip "Tiny ball"
+    }
+
+    stats {
+        strength  3
+        dexterity 3
+        constitution 3
+        intelligence 5
+        speed 3
+        charisma 3
+    }
+    
+    properties {
+        tag [cat ghost]
+        faction allies
+        type [boss cat]
+        inherit_faction true
+        health 20
+
+        movement 4
+
+        //dispersed_bonus_turns 2
+        corpse_health 0
+        banned_elite_buffs [Twin, BloodFrenzy, Mad]
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+    abilities {
+        move DefaultMove
+        attack DybbukLick
+        
+        spells [
+            DybbukWispsAlt
+            DybbukReanimate
+            DybbukEscape
+
+
+            DybbukPossessAlt
+            DybbukReturn
+            DybbukRePossess
+        ]
+    }
+
+    passives {
+        Dybbuk1HPTracker 1
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+		
+		BossRewards {
+			common CoffinArmor
+			rare DybbuksRib
+		}
+
+        FormChanger {
+            Default {
+
+                passives {
+                    SurviveAt1HP 1
+
+                    AbilityHealthThreshold {
+                        even_if_stunned true
+                        threshold 1
+                        ability DybbukPossessAlt
+                        //use_ai true
+                    }
+
+                }
+            }
+            Possessing {
+                animation_suffix "Possessing"
+
+                turns {
+                    takes_turns false
+                }
+
+                passives {
+                    SurviveAt1HP 1
+                }
+            }
+            LastHit {
+                turns {
+                    takes_turns true
+                    dispersed_bonus_turns 1
+                }
+            }
+            Bully {
+                turns {
+                    takes_turns true
+                }
+
+                passives {
+                    AddInitiative -9999
+                }
+
+                ai {
+                    brain PlayerBrain
+
+                    virtual_abilities {
+                        Escape {
+                            ability DybbukEscape
+                            move_weights keep_distance_always_move
+                        }
+                    }
+
+
+                    decision_weights default
+                    move_weights keep_distance
+                }
+            }
+        }
+
+
+        ChanceToBackflip {
+            chance 100%
+            ability DybbukBackflipDodge
+        }
+        Undead 1
+    }
+    
+    ai {
+        brain PlayerBrain
+
+        virtual_abilities {
+            Escape {
+                ability DybbukEscape
+                move_weights keep_distance_always_move
+            }
+        }
+
+        decision_weights default
+        move_weights keep_distance
+    }
+}
+MiniFatsoFamiliar {
+    graphics {
+        movieclip Fatso
+        name "Li'l boris"
+        water_mask square
+		tooltip "Fatty"
+        scale 0.5
+    }
+
+    stats {
+        strength 8
+        dexterity 1
+        constitution 5
+        intelligence 1
+        speed 1
+        charisma 2
+    }
+    
+    properties {
+        tag [cat blob]
+        faction allies
+        type boss
+        movement 1
+        //dispersed_bonus_turns 3
+        mana_regen 999
+        mana 100
+        
+        health 50
+        weak_threshold 25
+
+        //size 2x2
+        move_block everything_even_when_dead
+
+        //last_turn_is_main_turn true
+        banned_elite_buffs [BloodFrenzy Mad]
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+    abilities {
+        move DefaultMove
+        attack None
+        can_get_bonus true
+        
+        spells [
+            TrampleDash
+            MoveOne
+        ]
+    }
+
+    passives {
+        Trample 3
+        //FatsoBackstabReaction 1
+        MoveTowardsDamageSource MoveOne
+        AllyDamageReduction 0
+        Trample 1
+
+        BossRewards {
+			common Blubber
+			rare BorisBrain
+		}
+    }
+    
+    ai {
+        brain PlayerBrain
+        decision_weights default
+        move_weights stay_close
+        auto_orient false
+        
+    }
+}
+MiniQueenHippoFamiliar {
+    graphics {
+        movieclip QueenHippo
+        name "li'l Queen Hippo"
+        uifloaters_offset 1.75
+		tooltip "Don't let her have a heart attack :C"
+        scale 0.6
+    }
+
+    stats {
+        strength  9
+        dexterity 1
+        constitution 6
+        intelligence 1
+        speed 1
+        charisma 1
+    }
+    
+    properties {
+        tag cat
+        faction allies
+        type boss
+
+        health 40
+
+        movement 0
+
+        banned_elite_buffs [BloodFrenzy Mad]
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+     
+    }
+
+    abilities {
+        move DefaultMove
+        attack QueenHippoAttack
+        can_get_bonus true
+        
+        spells [
+            QueenHippoUppercut
+            QueenHippoRest
+            QueenHippoRest
+            QueenHippoRest
+
+            QueenHippoTire
+            QueenHippoHeartAttack
+        ]
+    }
+
+    passives {
+        Brace 2
+		
+		BossRewards {
+			common MissingNipple
+			rare QueensCrown
+		}
+
+        UseAbilityWhenOutOfStatus {
+            status Brace
+            ability QueenHippoHeartAttack
+        }
+
+        StatusEachTurnEnd {
+
+            ForceUseAbility QueenHippoTire
+        }
+    }
+    
+    ai {
+        brain PlayerBrain
+        decision_weights default
+        move_weights stay_close
+
+    }
+}
+MiniMotherFamiliar {
+    graphics {
+        movieclip TheMother
+        name "li'l mother"
+        uifloaters_offset 1
+        water_mask square
+        shadow_size 1
+        art_flip -1
+		tooltip "Tiny tumor"
+        scale 0.25
+    }
+
+    stats {
+        strength 5
+        dexterity 5
+        constitution 5
+        intelligence 5
+        speed 0
+        charisma 5
+        luck 5
+    }
+    
+    properties {
+        tag [tumor]
+        hidden_tag [themother]
+
+        faction allies
+        type boss
+        
+        health 60
+
+        movement 0
+
+        move_block everything_even_when_dead
+        knockback_immune true
+        //evenly_dispersed_bonus_turns 1
+        boss_minions_runaway false
+
+        lock_orientation [-1 0]
+        banned_elite_buffs [Twin BloodFrenzy Mad]
+
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+    abilities {
+        move None
+        attack SpawnMotherSpikeAlt
+        can_get_bonus true
+
+        spells [
+            MotherConsume
+            TheMother_BirthAlt
+        ]
+    }
+
+    passives {
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+		BossRewards {
+			common MothersTeeth
+			rare MothersLove
+		}
+		
+        MotherGrowController {
+            tumor_object MotherTumorAlt
+            eat_damage {
+                type melee
+                damage 0
+                piercing true
+                cant_miss true
+                makes_contact true
+
+                effects {
+                    Vaporize 20
+                }
+            }
+        }
+        PrioritizeFarAwayTargets 10
+    }
+    
+    ai {
+        brain PlayerBrain
+
+        pattern {
+            do_all [MotherConsume TheMother_Birth SpawnMotherSpike]
+        }
+
+        decision_weights default
+        move_weights stay_close
+    }
+}
+MotherTumorAlt {
+    graphics {
+        movieclip MotherTumor
+        name "ENEMY_MOTHERTUMOR_NAME"
+		tooltip "ENEMY_MOTHERTUMOR_DESC"
+    }
+
+    stats {
+        strength  5
+        dexterity 5
+        constitution 5
+        intelligence 5
+        speed 5
+        charisma 5
+    }
+    
+    properties {
+        tag [tumor]
+        hidden_tag [themother]
+        faction allies
+        type boss
+
+        health 5
+
+        movement 0
+
+        takes_turns false
+        corpse_health 0
+        lock_orientation [0 -1]
+        can_be_backstabbed false
+        knockback_immune true
+        held_coins 0
+        kill_required false
+        can_be_elite false
+    }
+
+    abilities {
+        move None
+        attack None
+        
+        spells [
+            MotherTumorGrow
+        ]
+    }
+
+    passives {
+        StunImmunity 1
+        MotherTumorSpawnInCapture {
+            Cat {
+                animation spawnHoldingCat
+                formchange SmallHoldingCat
+                statuses {
+                    Consumed {
+                        instant true
+                        mount_mode auto
+                        force_contact true
+                        do_not_pop_corpse true
+                        struggle_ability Thrash
+                        drop_on_death deferred
+                    }
+                }
+            }
+            NonCat {
+                animation spawnHolding
+                formchange SmallHolding
+                statuses {
+                    Consumed {
+                        instant true
+                        mount_mode auto
+                        use_placeholder true
+                        force_contact true
+                        do_not_pop_corpse true
+                        struggle_ability Thrash
+                        drop_on_death deferred
+                    }
+                }
+            }
+            Nothing {
+                animation spawn
+            }
+        }
+
+        FormChanger {
+            Small {
+                animation_suffix ""
+            }
+            SmallHolding {
+                animation_suffix "Holding"
+
+                passives {
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_hasnot Small
+                    }
+                }
+            }
+            SmallHoldingCat {
+                animation_suffix "HoldingCat"
+
+                passives {
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_hasnot Small
+                    }
+                }
+            }
+            Big {
+                animation_suffix "Big"
+            }
+            BigHolding {
+                animation_suffix "BigHolding"
+
+                passives {
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_hasnot Big
+                    }
+                }
+            }
+            BigHoldingCat {
+                animation_suffix "BigHoldingCat"
+
+                passives {
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_hasnot Big
+                    }
+                }
+            }
+        }
+
+        
+        MotherTumorPassive {
+            considered_forms [Big BigHolding BigHoldingCat] //exclude the small ones from pass/receive consideration
+        
+            pass_ani pass
+            receive_ani receive
+            grow_ability MotherTumorGrow
+
+            //copied from the SpawnIn passive (passives to add on RECEIVE)
+            Cat {
+                formchange BigHoldingCat
+                statuses {
+                    Consumed {
+                        instant true
+                        mount_mode auto
+                        force_contact true
+                        do_not_pop_corpse true
+                        struggle_ability Thrash
+                        drop_on_death deferred
+                    }
+                }
+            }
+            NonCat {
+                formchange BigHolding
+                statuses {
+                    Consumed {
+                        instant true
+                        mount_mode auto
+                        use_placeholder true
+                        force_contact true
+                        do_not_pop_corpse true
+                        struggle_ability Thrash
+                        drop_on_death deferred
+                    }
+                }
+            }
+        }
+    }
+    
+    ai {
+        brain NoBrain
+    }
+}
+
+MotherTumorBigAlt {
+    variant_of MotherTumor
+
+    properties {
+        health 9
+    }
+
+    passives {
+        MotherTumorSpawnInCapture {
+            Cat {
+                formchange BigHoldingCat
+            }
+            NonCat {
+                formchange BigHolding
+            }
+        }
+        FormChanger {
+            initial_form Big
+        }
+    }
+}
+MiniHitlerFamiliar {
+    graphics {
+        movieclip Hitler
+        name "Li'l hitler"
+        uifloaters_offset 2
+        shadow_size 1
+		tooltip "The Painter"
+        scale 0.5
+    }
+
+    stats {
+        strength  5
+        dexterity 5
+        constitution 5
+        intelligence 5
+        speed 5
+        charisma 5
+    }
+    
+    properties {
+        tag [humanoid robot]
+        faction allies
+        type boss
+        movement 4
+        //dispersed_bonus_turns 2
+
+        health 25
+        shield 25
+
+        move_block everything_even_when_dead
+        boss_minions_runaway false
+        scale 0.5
+
+        banned_elite_buffs [BloodFrenzy Mad]
+
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+    abilities {
+        move GooseStep
+        attack HitlerShoot
+
+        spells [
+            HitlerHeilAlt
+            HitlerSuicideMini
+            HitlerNukeMini
+        ]
+    }
+
+    passives {
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+        Trample 3
+        Robot 1
+		
+		BossRewards {
+			common HitlersPistol
+			rare HitlersMustache
+		}
+
+        FormChanger {
+            Default {
+                passives {
+                    HitlerExecute {
+                        tag grown_hitler_clone
+                        ability HitlerShoot
+                        threshold 15
+                    }
+
+                    ImmediateAbilityReaction {
+                        ability HitlerSuicideMini
+                        health_threshold 5
+                    }
+                }
+            }
+            Nuke {
+                animation_suffix Nuke
+                attack None
+                move None
+
+                passives {
+                    DebuffImmunity 1
+                    BuffImmunity 1
+                    AddInitiative -10
+                }
+
+                turns {
+                    dispersed_bonus_turns 0
+                }
+
+                ai {
+                    brain PlayerBrain
+
+                    pattern {
+                        do HitlerNukeMini
+                    }
+
+                    move_weights stay_close
+                    decision_weights always_cast
+                }
+            }
+        }
+        
+    }
+    
+    ai {
+        brain PlayerBrain
+
+        pattern {
+            do_priority [attack *HitlerHeil move]
+        }
+        mainturn_pattern {
+            do_priority [*HitlerHeil attack move]
+        }
+
+        move_weights stay_close_move_far
+        decision_weights default
+    }
+}
+
+MotherSpikeAlt {
+    graphics {
+        movieclip MotherSpike
+        name "ENEMY_MOTHERSPIKE_NAME"
+        uifloaters_offset 2
+    }
+
+    stats {
+        strength  5
+        dexterity 5
+        constitution 5
+        intelligence 5
+        speed 5
+        charisma 5
+    }
+    
+    properties {
+        tag [tumor]
+        hidden_tag [themother themotherspike]
+        faction allies
+        type boss
+
+        health 10
+        visually_spiky true
+
+        movement 0
+
+        takes_turns false
+        corpse_health 0
+        can_be_backstabbed false
+        knockback_immune true
+        held_coins 0
+        kill_required false
+        can_be_elite false
+    }
+
+    abilities {
+        move None
+        attack None
+        
+        spells [
+            
+        ]
+    }
+
+    passives {
+        Thorns 5
+    }
+    
+    ai {
+        brain NoBrain
+    }
+}
+
+MiniTormentorFamiliar {
+    graphics {
+        movieclip Tormentor
+        name "Li'l Tormentor"
+        uifloaters_offset 2
+        water_mask square
+        scale .3
+        //shadow_size 3
+        shadow TormentorShadow
+        //shade_occluded_objects true
+        status_display_count_max 5
+		tooltip "torments rats. ignore the massive shadow"
+        dont_sink true
+    }
+
+    stats {
+        strength 4
+        dexterity 4
+        constitution 4
+        intelligence 4
+        speed 4
+        charisma 4
+        luck 4
+    }
+    
+    properties {
+        tag demon
+        faction allies
+        type boss
+        flying true
+        
+        health 30
+
+        //size 3x3
+        movement 2
+
+        move_block everything_even_when_dead
+        dispersed_bonus_turns 0
+        banned_elite_buffs [Twin BloodFrenzy Mad]
+
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+    abilities {
+        move DefaultMove
+        attack BasicMelee
+
+        spells [
+            TormentorRuneAbsorb
+            TormentorBiteMini
+            TormentorSpawn
+            TormentorSuckMini
+        ]
+    }
+
+    passives {
+        TormentorHeal 1
+        UseAbility TormentorRuneAbsorb
+        DemonicGlyphFrames 1
+        DemonicGlyphStealer 1
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+		
+		BossRewards {
+			common LuciferSigil
+		}
+
+        FormChanger {
+            NotPriming {
+                turns {
+                    takes_main_turn true
+                    round_end_bonus_turns 1
+                    dispersed_bonus_turns 0
+                    wait_till_next_round_to_update_turns true
+                }
+
+                passives {
+                    PassiveWhileHasStatus {
+                        status DemonicGlyph_Bite
+                        passives {
+                            ExtraDispersedTurns 1
+                        }
+                    }
+                    PassiveWhileHasStatus {
+                        status DemonicGlyph_Summon
+                        passives {
+                            ExtraDispersedTurns 1
+                        }
+                    }
+                }
+            }
+            Priming {
+                turns {
+                    takes_main_turn false
+                    round_end_bonus_turns 1
+                    dispersed_bonus_turns 0
+                    wait_till_next_round_to_update_turns true
+                }
+
+                passives {
+
+                }
+            }
+        }
+
+        FormChangeWhilePrimingAbility {
+            priming Priming
+            not_priming NotPriming
+        }
+        PassiveWhileHasStatus {
+            status DemonicGlyph_Fire
+            passives {
+                AddDamage 2
+                AddStatusToBasicAttack {
+                    Burn 2
+                }
+            }
+        }
+        PassiveWhileHasStatus {
+            status DemonicGlyph_Movement
+            passives {
+                AddMovement 1
+                Trample 6
+            }
+        }
+        PassiveWhileNotHasStatus { //conditionally enabled trample doesnt stack its damage right so this hack handles it lol
+            status DemonicGlyph_Movement
+            passives {
+                Trample 3
+            }
+        }
+        PassiveWhileHasStatus {
+            status DemonicGlyph_Bounce
+            passives {
+                MeleeRevengeDamage {
+                    knockback 2
+                }
+            }
+        }
+    }
+    
+    ai {
+        brain PlayerBrain
+        decision_weights default
+        move_weights stay_close
+        stun_advances_pattern true
+        reset_pattern_on_formswitch true
+        reset_pattern_on_round_begin true
+
+        virtual_abilities {
+            SuckMF {
+                ability TormentorSuck
+                decision_weights careless
+                move_weights keep_distance
+            }
+        }
+        
+        mainturn_pattern {
+            do attack
+        }
+        bonusturn_pattern {
+            do_priority [TormentorBite TormentorSpawn attack]
+            do_priority [TormentorSpawn TormentorBite attack]
+        }
+        
+        round_end_bonusturn_pattern {
+            do SuckMF
+        }
+    }
+}
+
+MiniAlienBeastFamiliar {
+    graphics {
+        movieclip AlienBeast
+        name "li'l crater Maker"
+        projectile_spawn_offset [0 1]
+        shadow_size 1
+        uifloaters_offset 1
+        water_mask square
+		tooltip "small alien"
+        scale 0.5
+    }
+
+    stats {
+        strength 4
+        dexterity 4
+        constitution 4
+        intelligence 4
+        speed 4
+        charisma 4
+    }
+    
+    properties {
+        tag alien
+        faction allies
+        type boss
+        
+        health 30
+
+        //size 3x3
+        movement 2
+
+        move_block everything_even_when_dead
+        //round_start_bonus_turns 1
+        //last_turn_is_main_turn true
+        initiative -999
+
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+    abilities {
+        move DefaultMove
+        attack BasicBigMelee
+
+        spells [
+            AlienBeastScreamMini  //0 aux
+            AlienBeastEatMini     //1 aux
+            AlienBeastPuke    //2 aux
+            AlienBeastRampage //3 aux
+
+            AlienBeastGoop
+            AlienBeastOpenEyes
+
+            AlienBeastMoveOne
+        ]
+    }
+
+    passives {
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+        Trample 3
+		
+		BossRewards {
+			common FriendlyAmoeba
+			rare AlienStalk
+		}
+		
+        ImmediateAbilityReaction {
+            ability_damage_only true
+            ability AlienBeastGoop
+        }
+        AlienBeastEyeStalks 3
+        AlienBeastDangerZones [AlienBeastScreamMini AlienBeastEatMini AlienBeastPuke AlienBeastRampage]
+    }
+    
+    ai {
+        brain PlayerBrain
+
+        virtual_abilities {
+            MoveOneForPuke {
+                ability AlienBeastMoveOne
+                move_for_ability AlienBeastPuke
+                move_weights keep_distance
+            }
+        }
+
+        bonusturn_pattern {
+            do_all [attack AlienBeastOpenEyes]
+        }
+        mainturn_pattern {
+            do_all [*AlienBeastScream *AlienBeastEat *AlienBeastPuke *AlienBeastRampage]
+        }
+        
+        decision_weights default
+        move_weights stay_close
+    }
+}
+
+// mini evils
+MiniDybbuk {
+    variant_of MiniDybbukFamilliar
+    graphics {
+        movieclip Dybbuk
+        name "Li'l Dybbuk"
+        no_splatter true
+		scale 0.75
+		tooltip "Tiny evil ball"
+    }
+
+    properties {
+        faction enemies
+    }
+
+
+    abilities {
+        move DefaultMove
+        attack DybbukLick
+        
+        spells [
+            DybbukWisps
+            DybbukReanimate
+            DybbukEscape
+
+
+            DybbukPossess
+            DybbukReturn
+            DybbukRePossess
+        ]
+    }
+
+    
+    ai {
+        brain GenericBrain
+
+        virtual_abilities {
+            Escape {
+                ability DybbukEscape
+                move_weights keep_distance_always_move
+            }
+        }
+
+        decision_weights default
+        move_weights keep_distance
+    }
+}
+MiniFatso {
+    variant_of MiniFatsoFamiliar
+    graphics {
+        movieclip Fatso
+        name "Li'l boris"
+        water_mask square
+		tooltip "Gluttonus Fatty"
+        scale 0.5
+    }
+
+    properties {
+        faction enemies
+    }
+
+    ai {
+        brain GenericBrain
+        decision_weights default
+        move_weights stay_close
+        auto_orient false
+        
+    }
+}
+MiniQueenHippo {
+    variant_of MiniQueenHippoFamiliar
+    graphics {
+        movieclip QueenHippo
+        name "li'l Queen Hippo"
+        uifloaters_offset 1.75
+		tooltip "let her have a heart attack >:D"
+        scale 0.6
+    }
+
+    properties {
+        faction enemies
+    }
+    
+    ai {
+        brain GenericBrain
+        decision_weights default
+        move_weights stay_close
+
+    }
+}
+MiniMother {
+    variant_of MiniMother
+    graphics {
+        movieclip TheMother
+        name "li'l mother"
+        uifloaters_offset 1
+        water_mask square
+        shadow_size 1
+        art_flip -1
+		tooltip "Tiny tumor"
+        scale 0.25
+    }
+
+    properties {
+        faction enemies
+    }
+
+    abilities {
+        move None
+        attack SpawnMotherSpike
+        can_get_bonus true
+
+        spells [
+            MotherConsume
+            TheMother_Birth
+        ]
+    }
+
+    passives {
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+		BossRewards {
+			common MothersTeeth
+			rare MothersLove
+		}
+		
+        MotherGrowController {
+            tumor_object MotherTumor
+            eat_damage {
+                type melee
+                damage 0
+                piercing true
+                cant_miss true
+                makes_contact true
+
+                effects {
+                    Vaporize 20
+                }
+            }
+        }
+        PrioritizeFarAwayTargets 10
+    }
+    
+    ai {
+        brain GenericBrain
+
+        pattern {
+            do_all [MotherConsume TheMother_Birth SpawnMotherSpike]
+        }
+
+        decision_weights default
+        move_weights stay_close
+    }
+}
+MiniHitler {
+    variant_of MiniHitlerFamiliar
+    graphics {
+        movieclip Hitler
+        name "Li'l hitler"
+        uifloaters_offset 2
+        shadow_size 1
+		tooltip "The Painter"
+        scale 0.5
+    }
+
+    properties {
+        faction enemies
+    }
+
+   
+
+   
+    
+    ai {
+        brain GenericBrain
+
+        pattern {
+            do_priority [attack *HitlerHeil move]
+        }
+        mainturn_pattern {
+            do_priority [*HitlerHeil attack move]
+        }
+
+        move_weights stay_close_move_far
+        decision_weights default
+    }
+}
+
+
+
+MiniTormentor {
+    variant_of MiniTormentorFamiliar
+    graphics {
+        movieclip Tormentor
+        name "Li'l Tormentor"
+        uifloaters_offset 2
+        water_mask square
+        scale .3
+        //shadow_size 3
+        shadow TormentorShadow
+        //shade_occluded_objects true
+        status_display_count_max 5
+		tooltip "torments rats. ignore the massive shadow"
+        dont_sink true
+    }
+
+    stats {
+        strength 4
+        dexterity 4
+        constitution 4
+        intelligence 4
+        speed 4
+        charisma 4
+        luck 4
+    }
+    
+    properties {
+        faction enemies
+    }
+    
+    ai {
+        brain GenericBrain
+        decision_weights default
+        move_weights stay_close
+        stun_advances_pattern true
+        reset_pattern_on_formswitch true
+        reset_pattern_on_round_begin true
+
+        virtual_abilities {
+            SuckMF {
+                ability TormentorSuck
+                decision_weights careless
+                move_weights keep_distance
+            }
+        }
+        
+        mainturn_pattern {
+            do attack
+        }
+        bonusturn_pattern {
+            do_priority [TormentorBite TormentorSpawn attack]
+            do_priority [TormentorSpawn TormentorBite attack]
+        }
+        
+        round_end_bonusturn_pattern {
+            do SuckMF
+        }
+    }
+}
+
+MiniAlienBeast {
+    variant_of MiniAlienBeastFamiliar
+    graphics {
+        movieclip AlienBeast
+        name "li'l crater Maker"
+        projectile_spawn_offset [0 1]
+        shadow_size 1
+        uifloaters_offset 1
+        water_mask square
+		tooltip "small alien"
+        scale 0.5
+    }
+
+    
+    properties {
+        faction enemies
+    }
+
+    
+    ai {
+        brain GenericBrain
+
+        virtual_abilities {
+            MoveOneForPuke {
+                ability AlienBeastMoveOne
+                move_for_ability AlienBeastPuke
+                move_weights keep_distance
+            }
+        }
+        
+        decision_weights default
+        move_weights stay_close
+    }
+}

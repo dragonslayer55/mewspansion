@@ -513,7 +513,7 @@ TopHat {
     rarity uncommon
     kind head
     frame 138
-	set Cool
+	set [Cool, DrFetus]
 
     passives {
         StatusOnBattleStart {

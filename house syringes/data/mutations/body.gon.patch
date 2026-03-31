@@ -204,6 +204,15 @@ body {
         spd 1
     }
 
+    1201 { //Cactus Bod
+        desc "inflict Poison on every enemy each turn"
+        passives {
+
+        StatusEachTurnEnd {
+			ForceUseAbility face_FartFaceFixed
+		}
+        }
+    }
 
     //simple stat mod parts
     400 {

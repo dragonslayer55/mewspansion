@@ -8842,3 +8842,105 @@ Gatekeeper {
     }
 }
 
+BoyShadeAlt {
+    graphics {
+        movieclip ShadeM
+        name "ENEMY_HERALD_NAME"
+        uifloaters_offset 1.5
+		tooltip "ENEMY_HERALD_DESC"
+    }
+
+    stats {
+        strength 5
+        dexterity 5
+        constitution 5
+        intelligence 5
+        speed 5
+        charisma 5
+    }
+    
+    properties { 
+        tag [demon]
+        faction allies
+        movement 4
+        health 30
+    }
+
+    abilities {
+        move Teleport
+        attack BasicMelee
+        
+        spells [
+            ShadeDuplicateAlt
+        ]
+    }
+
+    passives {
+
+    }
+    
+    ai {
+        brain PatternBrain
+
+        pattern {
+            do_all [*ShadeDuplicate attack ShadeDuplicate move]
+        }
+
+
+        decision_weights default
+        move_weights stay_close
+    }
+}
+BoyShadeCloneAlt {
+    graphics {
+        movieclip ShadeMShadow
+        name "ENEMY_HERALDSHADOW_NAME"
+        uifloaters_offset 1.5
+        randomize_starting_frame false
+		tooltip "ENEMY_HERALDSHADOW_DESC"
+
+    }
+
+    stats {
+        strength 5
+        dexterity 5
+        constitution 5
+        intelligence 5
+        speed 5
+        charisma 5
+    }
+    
+    properties { 
+        tag [demon]
+        faction allies
+        movement 4
+        health 1
+        initiative -99
+        corpse_health 0
+    }
+
+    abilities {
+        move Teleport
+        attack BasicMelee
+        
+        spells [
+            
+        ]
+    }
+
+    passives {
+        DieWhenSpawnerDies 1
+    }
+    
+    ai {
+        brain PlayerBrain
+
+        pattern {
+            do attack
+        }
+
+
+        decision_weights default
+        move_weights stay_close
+    }
+}

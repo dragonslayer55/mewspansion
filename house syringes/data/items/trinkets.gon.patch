@@ -1418,7 +1418,7 @@ FetusInAJar {
     rarity rare
     kind trinket
     frame 155
-	set Baby
+	set [Baby, DrFetus]
     
     passives {
         StatusOnBattleStart {
@@ -2684,7 +2684,7 @@ PyrophinasCollar2 {
     kind trinket
     frame 219
     rarity very_rare
-    /indestructible true
+    //indestructible true
 	set Used
 
     global_tags [pyrophina_following]
@@ -2722,7 +2722,7 @@ RadCollar {
     kind trinket
     frame 560
     rarity very_rare
-    /indestructible true
+    //indestructible true
 	set Used
 
     global_tags [radical_following]
@@ -2786,7 +2786,7 @@ TinkererCollar {
     kind trinket
     frame 564
     rarity legendary
-    /indestructible true
+    //indestructible true
 	set Used
 
     global_tags [Franklin_following]
@@ -2805,7 +2805,7 @@ NecroCollar {
     kind trinket
     frame 565
     rarity legendary
-    /indestructible true
+    //indestructible true
 	set Used
 
     global_tags [Morana_following]
@@ -2847,17 +2847,24 @@ DybbuksMark {
 
 ExpandedPouch {
     name "Expanded Pouch"
-    desc "Increases the maximum amount of coins you can carry to 999"
+    desc "This gains durability for each coin picked up. when returning home this turns into that many coins."
     rarity very_rare
     kind trinket
     frame 230
-    max_durability 10000000000
+    durability [0 150]
+    max_durability 99999
+    dont_destroy_on_0 true
     X_is durability
+    aux durability
     on_store become_aux_coins
-    aux X
+    
+
+    
+    
 
 
-    ability wp_MoneyBag_Huge
+    // ability Coincheck
+    // ability wp_MoneyBag_Huge
 
     passives {
         //wallet_size 999
@@ -2866,6 +2873,8 @@ ExpandedPouch {
         }
     }
 }
+
+
 
 // TODO trinkets that may or may not make it in
 

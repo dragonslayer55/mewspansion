@@ -2549,16 +2549,8 @@ MageCatFamiliar {
     }
 }
 TinkererCatFamiliar {
-    graphics {
-        movieclip _CAT
-        name "ENEMY_FRANKLIN_NAME"
-        custom_cat_data TinkererCat
-		tooltip "ENEMY_FRANKLIN_DESC"
-    }
+    variant_of TinkererCat
 
-    equipment {
-        head TinkererHat
-    }
 
     stats {
         strength 10
@@ -2574,12 +2566,12 @@ TinkererCatFamiliar {
         faction allies
         type boss
         health 90
-		shield 400
+		shield 40
         dispersed_bonus_turns 1
         
         
         mana 200
-        mana_regen 10
+        mana_regen 15
         initial_mana 10
         mana_matters true*/
 
@@ -2596,7 +2588,7 @@ TinkererCatFamiliar {
 
     abilities {
         move DefaultMove
-        attack BasicMelee
+        attack TinkererCraft //BasicMelee
         
         spells [
             TCMechSuit2
@@ -2606,18 +2598,19 @@ TinkererCatFamiliar {
             NurseBot
             BatteryNuke2
             RefineMaterials
+            Craft2
         ]
     }
 
     passives {
         AddWeaponScaling 1
-        WeaponCountsAsBasicAttack 1
-        ExtraWeaponAttacks 1
+        LightningRod 1
         Tech 1
         MinimumTech 1
-        LightningRod 1
         AllyDamageReduction 0
         DissuadeInstakills 1
+        WeaponCountsAsBasicAttack 1
+        ExtraWeaponAttacks 1
 
         FormChanger {
             Default {
@@ -2649,15 +2642,20 @@ TinkererCatFamiliar {
     }
     
     ai {
-        brain PatternBrain
+        brain GenericBrain //PatternBrain
 
         pattern {
-            do_all [weapon *attack weapon attack move]
-            do_all [*AltTCCatBot weapon *attack weapon attack move]
-            do_random [Research2, NurseBot, BatteryNuke2, RefineMaterials]
+            //do_all [weapon *attack weapon attack move]
+            //do_all [*AltTCCatBot weapon *attack weapon attack move]
+            //do_random [Research2, NurseBot, BatteryNuke2, RefineMaterials]
+            do_priority [Research2, RefineMaterials, Craft2, weapon, *attack weapon, move]
+            do_priority [Research2, NurseBot, BatteryNuke2, RefineMaterials, Craft2, weapon, *attack weapon, *AltTCCatBot weapon, move]
+            do_random [Research2, NurseBot, BatteryNuke2, RefineMaterials, Craft2, weapon, *attack weapon, *AltTCCatBot weapon, move]
+            
+            
         }
 
-        decision_weights default
+        decision_weights always_cast
         move_weights keep_distance
     }
 }
@@ -2776,6 +2774,16 @@ NecroCatFamiliar {
             //playercat_health 0%
             immediate true
         }
+
+        StatusKilledCharacters {
+                Conditional_RandomChance {
+                    odds 10%
+                    AutoReanimate 100%
+                    FactionConversion 1
+                    CaptureFamiliar 1
+                }
+            } 
+
         ImmortalLeeches 2
         SpreadExtraDebuffs 3
     }
@@ -2794,10 +2802,10 @@ NecroCatFamiliar {
             do_all [attack]
         }
         round_end_bonusturn_pattern {
-            do_priority [NCGravecrawlFAR, AnimateDead2, Reap2, Haunt, SoulLink2, CarrionShot2, LifeDrain2]
+            do_priority [NCGravecrawlFAR, AnimateDead2, Reap2, Haunt, SoulLink2, CarrionShot2, LifeDrain2, attack]
         }
 
-        decision_weights default
+        decision_weights always_cast_necro
         move_weights keep_distance
     }
 }

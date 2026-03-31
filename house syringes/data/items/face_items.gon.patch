@@ -227,7 +227,7 @@ Monocle {
     rarity uncommon
     kind face
     frame 67
-
+    set DrFetus
     cha 1
 
     passives {

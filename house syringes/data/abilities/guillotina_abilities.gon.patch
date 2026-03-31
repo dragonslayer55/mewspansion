@@ -1290,3 +1290,306 @@ DigestCat {
         }
     }
 }
+TinaBasicMiniMelee {
+    template melee_attack
+
+    target { 
+        max_aoe 1
+        target_mode direction
+    }
+
+    damage_instance {
+        knockback 5
+    }
+}
+TinaBasicMiniMeleeA {
+    variant_of TinaBasicMiniMelee
+
+    graphics {
+        animation attackRage
+    }
+}
+
+
+BellyPoundTrans {
+    template self_buff
+    class DamageConsumedCharactersAbility
+
+    meta {
+        name "EABILITY_BELLYPOUND_NAME"
+        animate_name true
+    }
+
+    cost {
+
+    }
+
+    graphics {
+        animation bellypound
+    }
+    
+    
+    target {
+        target_mode none
+        knockback_mode none
+    }
+
+    self_damage {
+        effects {
+
+            TransformAbility TinaJumpAttackTrans
+            
+        }
+    }
+
+    damage_instance {
+        damage 5+bonus_melee_damage
+        type melee
+        contact_requires_adjacency false
+        ai_base_score 9999
+    }
+}
+
+DigestTrans {
+    template self_buff
+    class DamageConsumedCharactersAbility
+
+    meta {
+        name "EABILITY_DIGEST_NAME"
+        animate_name true
+    }
+
+    cost {
+
+    }
+
+    graphics {
+        animation digest
+    }
+    
+    
+    target {
+        target_mode none
+        knockback_mode none
+    }
+
+    self_damage {
+        heal 25
+        effects {
+
+            TransformAbility TinaSuck2Trans
+            
+        }
+    }
+
+    damage_instance {
+        damage 0
+        type melee
+        cant_miss true
+        ai_base_score 9999
+        effects {
+            Vaporize 1
+            
+        }
+
+    }
+}
+
+
+TinaJumpAttackTrans {
+    template jump_attack
+
+    meta {
+        name "Tina Jump Attack"
+    }
+
+    graphics {
+        //jump_start_animation leapattackwindup
+        full_jump_animation jumpattack
+        full_jump_sync_frames 37
+        full_jump_windup_frames 20
+    }
+
+    cost {
+        act_points 1
+    }
+    
+    target {
+        max_range 3
+        min_range 1
+        range_considers_character_size false
+        min_aoe 0
+        max_aoe 0
+    }
+
+    temporary_effects {
+        DisableTrample 1
+    }
+    
+    self_damage {
+        effects {
+            Conditional_InForm {
+                form BellyFull
+
+                TransformAbility BellyPoundTrans
+            }
+        }
+    }
+
+    damage_instance {
+        type melee
+        damage 5+bonus_melee_damage
+        knockback 4
+
+        effects {
+            IgnoreSelf 1
+            Bruise 1
+        }
+    }
+}
+
+TinaSpitTrans {
+    template throw_attack
+    
+    meta {
+        name "EABILITY_SPIT_NAME"
+    }
+
+    graphics {
+        animation shoot
+    }
+
+    cost {
+        mana 0
+        must_be_consuming true
+    }
+    
+    target {
+        max_range 5
+        min_range 3
+        range_mode cross
+        restrictions none
+        prioritize_dont_change_direction true
+        throw_consumed_character true
+    }
+    
+    self_damage {
+        effects {
+            Conditional_InForm {
+                form Rage
+
+                TransformAbility TinaSpit2
+            }
+        }
+    }
+
+    damage_instance {
+        damage 1
+        blocked_damage 5+bonus_melee_ability_damage
+        ai_base_score 9999
+
+        custom_additional_ai_weight toss_far
+    }
+}
+
+TinaSuckTrans {
+    template targeted_status
+
+    meta {
+        name "Tina suck"
+    }
+
+    graphics {
+        animation suck1
+    }
+
+    cost {
+        mana 0
+        must_not_be_consuming true
+    }
+
+    target {
+        max_range 20
+        range_mode cross
+        restrictions must_have_line_of_sight
+    }
+
+    self_damage {
+        effects {
+            Conditional_InForm {
+                form Rage
+
+                TransformAbility TinaSuck2Trans
+            }
+        
+        }
+    }
+
+    damage_instance {
+        type none
+        damage 0
+        cant_miss true
+        layer characters
+
+        effects {
+            Consumed {
+                struggle_ability TinaFlail
+                force_contact true
+                wet true
+            }
+            GenericDebuff 1 //for AI
+        
+        }
+    }
+}
+
+
+TinaSuck2Trans {
+    template targeted_status
+
+    meta {
+        name "Tina Suck2"
+ 
+    }
+
+    graphics {
+        animation suck2
+    }
+
+    cost {
+        mana 0
+        must_not_be_consuming true
+    }
+
+    target {
+        max_range 20
+        restrictions must_have_line_of_sight
+    }
+
+    self_damage {
+        effects {
+
+            TransformAbility DigestTrans
+            
+        }
+    }
+
+    damage_instance {
+        type none
+        damage 0
+        cant_miss true
+        layer characters
+
+        effects {
+            Consumed {
+                struggle_ability TinaFlailRage
+                force_contact true
+                wet true
+            }
+            GenericDebuff 1 //for AI
+
+            TransformAbility DigestTrans
+            
+        }
+    }
+}

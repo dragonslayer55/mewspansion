@@ -877,3 +877,391 @@ GuillotinaFamiliar {
         move_weights stay_close
     }
 }
+
+MiniGuillotinaFamiliar {
+    graphics {
+        movieclip Guillotina1
+        name "Li'l Guillotina"
+        shadow_size 1
+		tooltip "Tiny Tina!"
+        scale 0.5
+    }
+
+    stats {
+        strength 3
+        dexterity 3
+        constitution 6
+        intelligence 3
+        speed 4
+        charisma 5
+    }
+    
+    properties {
+        tag cat
+        faction allies
+        inherit_faction true
+        type [boss cat]
+        movement 3
+        corpse_health indestructible
+
+        move_block everything_even_when_dead
+
+        
+        mana_regen 999
+        mana 100
+        
+        health 30
+        weak_threshold 10
+        banned_elite_buffs [BloodFrenzy Mad]
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+    abilities {
+        move DefaultMove
+        attack TinaBasicMiniMelee
+        
+        spells [
+            TinaThrow
+            TinaJumpAttack
+            TinaSuck
+            TinaSpit
+            TinaBasicJump
+
+            Guillotina1Rage
+            
+            BellyPound
+            Digest
+            TinaSuck2
+            TinaSpit2
+        ]
+        can_get_bonus true
+    }
+
+    passives {
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+        Trample 1
+        GuillotinaDeathHead 1
+
+        FormChanger {
+            //phase 1
+            Normal { 
+                attack TinaBasicMiniMeleeA
+
+                passives {
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_has MouthFull
+                        form_hasnot Normal
+                    }
+                    AbilityHealthThreshold {
+                        threshold 10
+                        ability Guillotina1Rage
+                    }
+                }
+
+                ai {
+                    brain PlayerBrain
+
+
+                    decision_weights default
+                    move_weights stay_close
+                    reset_pattern_on_formswitch true
+                    fallback_advances_pattern true
+                }
+            }
+            MouthFull {
+                partial_animation_suffix "MouthFull"
+
+                passives {
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_has MouthFull
+                        form_hasnot Normal
+                    }
+                    ChanceToSpitOnDamage {
+                        chance_per_damage 2%
+                        ability TinaSpit
+                    }
+                }
+
+                ai {
+                    brain PlayerBrain
+
+                    pattern {
+                        do *TinaSpit
+                    }
+
+                    decision_weights default
+                    move_weights stay_close
+                    end_turn_on_formswitch true
+                    reset_pattern_on_formswitch true
+                }
+            }
+
+            //phase 2
+            Rage {
+                partial_animation_suffix "Rage"
+
+                passives {
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_has BellyFull
+                        form_hasnot Rage
+                    }
+                    AddMovement 1
+                }
+
+                ai {
+                    brain PlayerBrain
+
+                    pattern {
+                        do_priority [TinaJumpAttack, *attack, attack, move]
+                        do_priority [*attack, attack, TinaJumpAttack, move]
+                        do_priority [*TinaSuck2, TinaSuck2, *attack, attack]
+                    }
+
+                    decision_weights default
+                    move_weights stay_close
+                    reset_pattern_on_formswitch true
+                }
+            }
+            BellyFull {
+                partial_animation_suffix "Belly"
+
+                passives {
+                    StatusEachTurnBegin {
+                        odds 25%
+
+                        ConjureBonusAbility Digest
+                    }
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_has BellyFull
+                        form_hasnot Rage
+                    }
+                    ChanceToSpitOnDamage {
+                        chance_per_damage 2%
+                        ability TinaSpit2
+                    }
+                    DigestDeadBodies Digest
+                    AddMovement 1
+                }
+
+                ai {
+                    brain PlayerBrain
+
+                    pattern {
+                        do_priority [*attack, attack, BellyPound]
+                        do *BellyPound
+                        do_priority [*attack, attack, BellyPound]
+                        do *Digest
+                    }
+
+                    decision_weights default
+                    move_weights stay_close
+                    end_turn_on_formswitch true
+                    reset_pattern_on_formswitch true
+                }
+            }
+
+            initial_form Normal
+        }
+    }
+    
+    ai {
+        brain NoBrain
+
+        decision_weights default
+        move_weights stay_close
+    }
+}
+
+MiniGuillotina {
+    variant_of MiniGuillotinaFamiliar
+    graphics {
+        movieclip Guillotina1
+        name "Li'l Guillotina"
+        shadow_size 1
+		tooltip "Tiny Tina!"
+        scale 0.5
+    }
+
+    
+    properties {
+        tag cat
+        faction enemies
+        inherit_faction true
+        type [boss cat]
+        movement 3
+        corpse_health indestructible
+
+        move_block everything_even_when_dead
+
+        
+        mana_regen 999
+        mana 100
+        
+        health 30
+        weak_threshold 10
+        banned_elite_buffs [BloodFrenzy Mad]
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+
+    passives {
+        AllyDamageReduction 0
+        DissuadeInstakills 1
+        Trample 1
+        GuillotinaDeathHead 1
+
+        FormChanger {
+            //phase 1
+            Normal { 
+                attack TinaBasicMiniMeleeA
+
+                passives {
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_has MouthFull
+                        form_hasnot Normal
+                    }
+                    AbilityHealthThreshold {
+                        threshold 10
+                        ability Guillotina1Rage
+                    }
+                }
+
+                ai {
+                    brain GenericBrain
+
+
+                    decision_weights default
+                    move_weights stay_close
+                    reset_pattern_on_formswitch true
+                    fallback_advances_pattern true
+                }
+            }
+            MouthFull {
+                partial_animation_suffix "MouthFull"
+
+                passives {
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_has MouthFull
+                        form_hasnot Normal
+                    }
+                    ChanceToSpitOnDamage {
+                        chance_per_damage 2%
+                        ability TinaSpit
+                    }
+                }
+
+                ai {
+                    brain GenericBrain
+
+                    pattern {
+                        do *TinaSpit
+                    }
+
+                    decision_weights default
+                    move_weights stay_close
+                    end_turn_on_formswitch true
+                    reset_pattern_on_formswitch true
+                }
+            }
+
+            //phase 2
+            Rage {
+                partial_animation_suffix "Rage"
+
+                passives {
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_has BellyFull
+                        form_hasnot Rage
+                    }
+                    AddMovement 1
+                }
+
+                ai {
+                    brain GenericBrain
+                    pattern {
+                        do_priority [TinaJumpAttack, *attack, attack, move]
+                        do_priority [*attack, attack, TinaJumpAttack, move]
+                        do_priority [*TinaSuck2, TinaSuck2, *attack, attack]
+                    }
+
+                    decision_weights default
+                    move_weights stay_close
+                    reset_pattern_on_formswitch true
+                }
+            }
+            BellyFull {
+                partial_animation_suffix "Belly"
+
+                passives {
+                    StatusEachTurnBegin {
+                        odds 25%
+
+                        ConjureBonusAbility Digest
+                    }
+                    FormChangeWhileHasStatus {
+                        status Consuming
+                        form_has BellyFull
+                        form_hasnot Rage
+                    }
+                    ChanceToSpitOnDamage {
+                        chance_per_damage 2%
+                        ability TinaSpit2
+                    }
+                    DigestDeadBodies Digest
+                    AddMovement 1
+                }
+
+                ai {
+                    brain GenericBrain
+
+                    pattern {
+                        do_priority [*attack, attack, BellyPound]
+                        do *BellyPound
+                        do_priority [*attack, attack, BellyPound]
+                        do *Digest
+                    }
+
+                    decision_weights default
+                    move_weights stay_close
+                    end_turn_on_formswitch true
+                    reset_pattern_on_formswitch true
+                }
+            }
+
+            initial_form Normal
+        }
+    }
+    
+    ai {
+        brain NoBrain
+
+        decision_weights default
+        move_weights stay_close
+    }
+}

@@ -20258,7 +20258,8 @@ DybbukPossessAlt {
         min_aoe 0
 
         max_range 20
-        restrictions [must_have_cat, must_have_enemy]
+        restrictions must_have_enemy
+        aoe_restrictions [enemies_only]
     }
 
     self_damage {
@@ -20337,10 +20338,632 @@ TCMechSuit2 {
     }
 
     cost {
-      //  mana 0
+        cantrip true
+        mana 0
+        cant_cast X-25
+    }
+    
+    target {
+        X_is current_health
     }
 
     spawn {
         object TCMechSuit2
+    }
+}
+
+DybbukWispsAlt {
+    template spawn
+
+    graphics {
+        lob true
+        animation wisps
+    }
+
+    target {
+        target_mode none    
+        max_aoe 1
+        max_targets 2
+        multihit 2
+        stagger_multihit_targets true
+    }
+
+    spawn {
+        object WispGood
+        faction self
+    }
+}
+
+PlayerPossess {
+    template jump_attack
+
+    meta {
+        name "EABILITY_POSSESS_NAME"
+    }
+
+    graphics {
+        jump_attack_animation land
+    }
+
+    cost {
+        cantrip true
+    }
+
+    target {
+        remain_off_map true
+
+        aoe_excludes_self false
+        max_aoe 0
+        min_aoe 0
+
+        max_range 20
+        restrictions must_have_enemy
+        aoe_restrictions [enemies_only]
+    }
+
+    self_damage {
+        effects {
+            Cleanse 0
+            FormChange Possessing
+        }
+    }
+
+    damage_instance {
+        damage 0
+        cant_miss true
+        type spell
+        makes_contact false
+
+        effects {
+            IgnoreSelf 1
+
+            Conditional_Speculative {
+            } Else { //just dont want the AI considering any of this
+                PurgeAll 1
+                Revive 100%
+                AllStatsUp 5
+                FullHeal 1
+                
+                DybbukPossessed {
+                    exit_ability DybbukReturn
+                    punch_self_ability Dybbuk_StopHittingYourself
+                }
+
+                CatPartsTransform {
+                    //palette 999
+                    mouth 1069
+                    eye1 1069
+                    eye2 1069
+                    eyebrow1 1069
+                    eyebrow2 1070
+                    palette 86
+                }
+                
+                
+            }
+            //learn_passive_from_pool oof
+            
+        }
+
+        custom_additional_ai_weight dybbuk_possession
+    }
+}
+
+
+Player_StopHittingYourself {
+    template melee_attack
+    
+    meta {
+        name "EABILITY_STOPHITTINGYOURSELF_NAME"
+        is_basic_attack true
+    }
+
+    cost {
+        cantrip true
+        mana 0
+        allow_offmap_casts true
+    }
+
+    graphics {
+        animation punchSelf
+    }
+
+    target { 
+        target_mode none
+        min_aoe 0
+        max_aoe 0
+        restrictions none
+        aoe_excludes_self false
+    }
+
+    damage_instance {
+        cant_miss true
+        damage 10
+
+        effects {
+            StatusOnDie{
+                RemoveStatus DybbukPossessed
+            }
+            Conditional_BadRoll{
+                odds 10%
+
+                RemoveStatus DybbukPossessed
+            }
+            
+        }
+    }
+}
+
+PlayerReturn {
+    template return
+
+    meta {
+        name "player return"
+    }
+
+    graphics {
+        jump_attack_animation land
+    }
+
+    cost {
+        infcantrip true
+        allow_offmap_casts true
+        must_be_offmap true
+    }
+
+    target {
+        aoe_mode all
+        remain_off_map false
+        target_mode tile
+        //target_mode random_closest_tile
+        aoe_excludes_self false
+
+        min_range 0
+        max_range 2000
+        restrictions none
+        aoe_restrictions none
+    }
+
+    self_damage {
+        effects {
+            Cleanse 0
+            FormChange default
+        }
+    }
+
+    damage_instance {
+        damage 1
+        cant_miss true
+        type spell
+
+
+        effects {
+            Conditional_HasStatus {
+                status DybbukPossessed
+
+                Cleanse 0
+                Purge 0
+                Fear 5
+                BonusDamage 10
+                RemoveStatus DybbukPossessed
+            }
+
+            Conditional_HasStatus {
+                status Possessed
+
+            
+                Cleanse 0
+                Purge 0
+                Fear 5
+                BonusDamage 10
+                RemoveStatus DybbukPossessed
+                RemoveStatus Possessed
+            
+            }
+    }
+}
+}
+
+QueenHippoRest {
+    template self_buff
+
+    graphics {
+        animation breathing
+    }
+
+    cost {
+        cantrip true
+    }
+
+    target {
+        prioritize_face_camera true
+    }
+
+    damage_instance {
+        ai_base_score 999999
+
+        effects {
+            Brace 1
+            Stun 3
+        }
+    }
+}
+HitlerHeilAlt {
+    template spell
+
+    graphics {
+        particle none
+        animation heil
+        dont_visualize_ai true
+    }
+
+    target { 
+        target_mode none
+        max_aoe 20
+
+        aoe_restrictions [allies_only]
+        //target_requires_tag hitler_clone
+        knockback_mode tile_to_character
+    }
+    
+    damage_instance {
+        damage 0
+        cant_miss true
+        type status_spell
+
+        effects {
+            Conditional_PlayerCat {
+                SpeedUp 1
+                DamageUp 1
+            }
+            Conditional_HasTag {
+                tag grown_hitler_clone
+                FaceAway 1
+                ImmediateUseAbility HitlerCloneHeil
+            }
+            Conditional_HasTag {
+                tag hitler_clone_fetus
+                ImmediateUseAbility HitlerCloneTransform
+            }
+        }
+
+        ai_base_score 999999
+    }
+}
+SpawnMotherSpikeAlt {
+    template spawn
+
+    graphics {
+        lob false
+        animation spike
+    }
+
+    cost {
+        mana 0
+    }
+
+    target {
+        max_range 20
+
+        range_excludes_blocking false
+        aoe_restrictions none
+        knockback_mode tile_to_character
+    }
+
+    spawn {
+        object MotherSpikeAlt
+    }
+    damage_instance {
+        damage 3
+        effects {
+            KnockUpAndAway {
+                stacks 3
+                distance 2
+            }
+        }
+    }
+}
+TheMother_BirthAlt {
+    template spell
+
+    meta {
+        name EABILITY_BIRTH_NAME
+    }
+
+    graphics {
+        animation spike
+        particle none
+    }
+
+    cost {
+        mana 0
+    }
+
+    bonus_passives {
+        AbilityEnabledOncePerFightAtHealthThreshold 25%
+    }
+
+    target {
+        target_mode none
+        aoe_mode all
+        restrictions aoe_must_exist
+        aoe_restrictions [must_have_tag]
+        target_requires_tag themotherspike
+    }
+
+    damage_instance {
+        type none
+        damage 0
+        cant_miss true
+
+        effects {
+            Conditional_HasTag {
+                tag themotherspike
+                PopAndSpawn {
+                    object BoyShadeAlt
+                    no_splatter false
+                }
+            }
+        }
+        ai_base_score 999999
+    }
+}
+ShadeDuplicateAlt {
+    template spawn
+    
+    graphics {
+        animation spawn
+    }
+    
+    cost {
+        cantrip true
+    }
+
+    target {
+        max_range 1
+    }
+
+    spawn {
+        object BoyShadeCloneAlt
+        ai_base_score 9999
+        faction self
+    }
+}
+TormentorSuckMini {
+    template spell
+
+    meta {
+        name "EABILITY_FEAST_NAME"
+    }
+    
+    cost {
+        prime 1
+    }
+
+    graphics {
+        animation megabite
+        particle none
+    }
+    
+    target {
+        target_mode direction
+
+        aoe_considers_character_size true
+        aoe_excludes_self true
+        aoe_mode cone
+        min_range 1
+        max_range 1
+        min_aoe -1
+        max_aoe 3
+    }
+    
+    damage_instance {
+        damage 0
+        type status_spell
+        custom_additional_ai_weight tile_exists
+        ai_base_score 999999
+
+        effects {
+            Conditional_HasTag {
+                tag kaiju
+            } Else {
+                Consumed {
+                    kill_on_consume true
+                    force_contact true
+                }
+
+                GenericDebuff 100
+            }
+        }
+    }
+
+    self_damage {
+        effects {
+            EndTurn 1
+        }
+    }
+}
+TormentorBiteMini {
+    template melee_attack
+
+    meta {
+        name "EABILITY_LUCIFER_NAME"
+    }
+
+    graphics {
+        animation bite
+    }
+
+    bonus_passives {
+        AbilityEnabledIfHasStatus DemonicGlyph_Bite
+        AbilityEnabledOncePerRound 1
+    }
+
+    damage_instance {
+        damage 1+bonus_melee_damage
+        type melee
+
+        effects {
+            RandomStatDown 2
+        }
+    }
+}
+HitlerSuicideMini {
+    template melee_attack
+
+    graphics {
+        animation suicide
+    }
+    target {
+        target_mode none
+        min_range 0
+        max_range 0
+        min_aoe 0
+        max_aoe 0
+        aoe_excludes_self false
+        aoe_mode standard
+        multihit 2
+    }
+
+    damage_instance {
+        damage 0
+        type status_spell
+
+        effects {
+            Conditional_LastHit {
+                DelayCastAbility HitlerNukeMini
+            } Else {
+                Cleanse 0
+                FaceCamera 1
+                ShowFakeDamage {
+                    stacks 999
+                    style [crit]
+                }
+                SetHealth 1
+                SetShield 50
+                FormChange Nuke
+                RemoveTurnsThisRound 1
+            }
+        }
+    }
+}
+
+HitlerNukeMini {
+    template spell
+
+    meta {
+        name "EABILITY_NUKE_NAME"
+    }
+
+    graphics {
+        animation detonate
+        particle Explosion
+        delay 5
+        dont_visualize_ai true
+    }
+
+    target {
+        aoe_mode all
+        target_mode none
+        aoe_excludes_self true
+        aoe_restrictions [must_have_piercing_line_of_sight]
+    }
+
+    self_damage {
+        damage 0
+        piercing true
+        effects {
+            DeferVaporize 1
+        }
+
+        elements [
+            Explosion
+        ]
+    }
+
+    damage_instance {
+        damage 15
+
+        effects {
+            CorpseVaporizer 1 //kills any corpses it hits, characters leave no corpses
+        }
+
+        elements [
+            Explosion
+        ]
+    }
+}
+
+AlienBeastScreamMini {
+    template spell
+
+    meta {
+        name "EABILITY_CRATERHOWL_NAME"
+    }
+
+    graphics {
+        particle none
+        animation howl
+    }
+    
+    cost {
+        mana 0
+        requires_exact_character_aux 0
+    }
+    
+    target {
+        target_mode none
+        aoe_mode circle
+        prioritize_dont_change_direction true
+        aoe_excludes_self true
+        min_aoe 1
+        max_aoe 5
+        aoe_restrictions [enemies_only]
+    }
+
+    damage_instance {
+        damage 7
+        ai_base_score 999999
+
+        effects {
+            Stun [1 .3]
+            Immobile [1 .4]
+        }
+    }
+}
+
+
+AlienBeastEatMini {
+    template melee_attack
+
+    meta {
+        name "EABILITY_CONSUME_NAME"
+    }
+
+    graphics {
+        animation eat
+    }
+
+    cost {
+        requires_exact_character_aux 1
+    }
+    
+    target {
+        aoe_mode custom
+        aoe_symmetry none
+        custom_aoe [[1, 0]]
+        aoe_considers_character_size false
+        prioritize_dont_change_direction true
+    }
+
+    damage_instance {
+        damage 99999
+        cant_miss true
+        ai_base_score 999999
+
+        effects {
+            Vaporize 1
+            VaporizeInanimate 1
+        }
     }
 }

@@ -737,3 +737,483 @@ ZaratanaFamiliar {
         stun_advances_pattern true
     }
 }
+
+//mini VERSIONS
+MiniPyrophinaFamiliar {
+    graphics {
+        movieclip Pyrophina
+        name "li'l Pyrophina"
+        shadow_size 1
+        move_speed_sync_frames 50
+        scale 0.5
+        water_mask big
+        uifloaters_offset 2
+
+        tooltip "She's really trying her best :C"
+    }
+
+    stats {
+        strength 6
+        dexterity 3
+        constitution 6
+        intelligence 2
+        speed 4
+        charisma 10
+    }
+    
+    properties {
+        tag kaiju
+        faction allies
+        inherit_faction true
+        type boss
+        movement 3
+        corpse_health indestructible
+
+        //size 2x2
+        //evenly_dispersed_bonus_turns 2
+        move_block everything_even_when_dead
+        initiative -5
+        
+        mana_regen 999
+        mana 100
+        
+        health 40
+        weak_threshold 20
+        ai_scale .25
+        banned_elite_buffs [BloodFrenzy Mad]
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+    abilities {
+        move DefaultMove
+        attack PyrophinaSoloAttackMini
+        can_get_bonus true
+        
+        spells [
+            //PyrophinaVSSpinThrow
+            PyrophinaVSWeatherRoar
+            PyrophinaSoloCatThrow
+            PyrophinaSoloFlamethrowerMini
+            PyrophinaSoloEarthquakeStomp
+            PyrophinaSoloRoar
+
+            PyrophinaVSRun
+            PyrophinaSoloFlameSooth
+        ]
+        //BonusAbility PyrophinaSoloFlameSooth
+    }
+
+    passives {
+        AllyDamageReduction 0
+        Trample 1
+        KaijuKnockbackImmune 1
+        DissuadeInstakills 1
+        ElementImmune Fire
+
+        //ChanceToDisableActionsIfNotCharmed 75% //25% chance of actually attacking on any given turn, unless charmed/posessed/madness/etc
+        BonusAbility PyrophinaSoloFlameSooth
+
+        
+    }
+    
+    ai {
+        brain PlayerBrain
+
+        virtual_abilities {
+            MoveForThrow {
+                ability move
+                move_for_ability PyrophinaSoloCatThrow
+                move_weights util_minmove
+            }
+            RunFar {
+                ability PyrophinaVSRun
+                move_weights run_far
+            }
+        }
+
+
+        fallback {
+            do_priority [*attack RunFar]
+        }
+
+        fallback_advances_pattern true
+        stun_advances_pattern true
+
+        decision_weights default
+        move_weights keep_distance_always_move
+    }
+}
+
+MiniZaratanaFamiliar {
+    graphics {
+        movieclip Zaratana
+        name "li'l Zaratana"
+        shadow_size 1
+        move_speed_sync_frames 52
+        scale 0.5
+        water_mask big
+
+        tooltip "Basket ball zaratana"
+    }
+
+    stats {
+        strength 5
+        dexterity 2
+        constitution 10
+        intelligence 2
+        speed 1
+        charisma 1
+    }
+    
+    properties {
+        tag [kaiju rock]
+        hidden_tag zaratana
+        faction allies
+        inherit_faction true
+        type boss
+        movement 3
+        corpse_health indestructible
+
+        //evenly_dispersed_bonus_turns 2
+        move_block everything_even_when_dead
+        initiative -5
+        
+        mana_regen 999
+        mana 100
+        
+        health 50
+        weak_threshold 25
+        ai_scale .50
+        banned_elite_buffs [BloodFrenzy Mad]
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+    abilities {
+        move DefaultMove
+        attack ZaratanaSoloBasicMini
+        can_get_bonus true
+        
+        spells [
+            ZaratanaSoloMagnet
+            ZaratanaSoloBombardmentMini
+            ZaratanaSoloTurtleCombo
+            //ZaratanaSoloTurtleTrans
+            ZaratanaSoloRoar
+            ZaratanaSoloSpinDash
+
+            ZaratanaVSRevenge
+            ZaratanaSoloWeatherRoar
+            ZaratanaVSExitTurtle
+            ZaratanaSoloCrater
+        ]
+        //BonusAbility ZaratanaSoloCrater
+        
+    }
+
+    passives {
+        AllyDamageReduction 0
+        Trample 1
+        KaijuKnockbackImmune 1
+        DissuadeInstakills 1
+
+        //ChanceToDisableActionsIfNotCharmed 75% //25% chance of actually attacking on any given turn, unless charmed/posessed/madness/etc
+        BonusAbility ZaratanaSoloCrater
+        
+    
+
+        ImmediateAbilityReaction {
+            ability ZaratanaVSRevenge
+            ability_damage_only true
+            damage_threshold 10
+        }
+
+        FormChanger {
+            Default {
+                passives {
+                    ImmediateAbilityReaction {
+                        ability ZaratanaVSRevenge
+                        ability_damage_only true
+                        damage_threshold 10
+                    }
+                    BonusAbility ZaratanaSoloCrater
+                }
+                abilities {
+                    move DefaultMove
+                    attack ZaratanaSoloBasicMini
+        
+                    spells [
+                        ZaratanaSoloMagnet
+                        ZaratanaSoloBombardmentMini
+                        ZaratanaSoloTurtle
+                        ZaratanaSoloRoar
+                        ZaratanaSoloSpinDash
+
+                        ZaratanaVSRevenge
+                        ZaratanaSoloWeatherRoar
+                        ZaratanaVSExitTurtle
+                    ]
+                }
+            }
+            Turtled {
+                attack None
+                move None
+                animation_suffix Turtle
+
+
+                passives {
+                    Brace 10
+                    Conditional_BadRoll{
+                        odds 50%
+
+                        ConjureBonusAbility ZaratanaVSExitTurtle
+                    } Else {
+                        ConjureBonusAbility ZaratanaSoloSpinDash
+                    }
+                    BonusAbility ZaratanaSoloCrater
+                }
+
+                ai {
+                    brain PlayerBrain
+
+                    pattern {
+                        do **ZaratanaSoloSpinDash
+                        do *ZaratanaVSExitTurtle
+                    }
+                    reset_pattern_on_formswitch true
+                    stun_advances_pattern false
+                }
+            }
+        }
+    }
+    
+    ai {
+        // brain DbgPlayerBrain
+        brain PlayerBrain
+
+
+        fallback {
+            do_priority [attack move]
+        }
+
+
+        decision_weights default
+        move_weights stay_close
+
+        fallback_advances_pattern true
+        stun_advances_pattern true
+    }
+}
+
+//evil mini VERSIONS
+MiniPyrophina {
+    variant_of MiniPyrophinaFamiliar
+
+    
+    properties {
+        tag kaiju
+        faction enemies
+        inherit_faction true
+        type boss
+        movement 3
+        corpse_health indestructible
+
+        //size 2x2
+        //evenly_dispersed_bonus_turns 2
+        move_block everything_even_when_dead
+        initiative -5
+        
+        mana_regen 999
+        mana 100
+        
+        health 40
+        weak_threshold 20
+        ai_scale .25
+        banned_elite_buffs [BloodFrenzy Mad]
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+    
+    ai {
+        brain GenericBrain
+
+        virtual_abilities {
+            MoveForThrow {
+                ability move
+                move_for_ability PyrophinaSoloCatThrow
+                move_weights util_minmove
+            }
+            RunFar {
+                ability PyrophinaVSRun
+                move_weights run_far
+            }
+        }
+
+
+        fallback {
+            do_priority [*attack RunFar]
+        }
+
+        fallback_advances_pattern true
+        stun_advances_pattern true
+
+        decision_weights default
+        move_weights keep_distance_always_move
+    }
+}
+
+MiniZaratana {
+    variant_of MiniZaratanaFamiliar
+    
+    properties {
+        tag [kaiju rock]
+        hidden_tag zaratana
+        faction enemies
+        inherit_faction true
+        type boss
+        movement 3
+        corpse_health indestructible
+
+        //evenly_dispersed_bonus_turns 2
+        move_block everything_even_when_dead
+        initiative -5
+        
+        mana_regen 999
+        mana 100
+        
+        health 50
+        weak_threshold 25
+        ai_scale .50
+        banned_elite_buffs [BloodFrenzy Mad]
+        is_player_cat true
+        can_be_overkilled false //player cats will not instapop on extreme damage kills
+        can_collect_coins true
+        can_eat_food true
+        can_run false
+        exclude_from_hallucinate true
+        
+        uncapturable true
+        
+        allow_flying_effect true
+    }
+
+
+    passives {
+        AllyDamageReduction 0
+        Trample 1
+        KaijuKnockbackImmune 1
+        DissuadeInstakills 1
+
+        //ChanceToDisableActionsIfNotCharmed 75% //25% chance of actually attacking on any given turn, unless charmed/posessed/madness/etc
+        BonusAbility ZaratanaSoloCrater
+        
+    
+
+        ImmediateAbilityReaction {
+            ability ZaratanaVSRevenge
+            ability_damage_only true
+            damage_threshold 10
+        }
+
+        FormChanger {
+            Default {
+                passives {
+                    ImmediateAbilityReaction {
+                        ability ZaratanaVSRevenge
+                        ability_damage_only true
+                        damage_threshold 10
+                    }
+                    BonusAbility ZaratanaSoloCrater
+                }
+                abilities {
+                    move DefaultMove
+                    attack ZaratanaSoloBasicMini
+        
+                    spells [
+                        ZaratanaSoloMagnet
+                        ZaratanaSoloBombardmentMini
+                        ZaratanaSoloTurtle
+                        ZaratanaSoloRoar
+                        ZaratanaSoloSpinDash
+
+                        ZaratanaVSRevenge
+                        ZaratanaSoloWeatherRoar
+                        ZaratanaVSExitTurtle
+                    ]
+                }
+            }
+            Turtled {
+                attack None
+                move None
+                animation_suffix Turtle
+
+
+                passives {
+                    Brace 10
+                    Conditional_BadRoll{
+                        odds 50%
+
+                        ConjureBonusAbility ZaratanaVSExitTurtle
+                    } Else {
+                        ConjureBonusAbility ZaratanaSoloSpinDash
+                    }
+                    BonusAbility ZaratanaSoloCrater
+                }
+
+                ai {
+                    brain GenericBrain
+
+                    pattern {
+                        do **ZaratanaSoloSpinDash
+                        do *ZaratanaVSExitTurtle
+                    }
+                    reset_pattern_on_formswitch true
+                    stun_advances_pattern false
+                }
+            }
+        }
+    }
+    
+    ai {
+        // brain DbgPlayerBrain
+        brain GenericBrain
+
+
+        fallback {
+            do_priority [attack move]
+        }
+
+
+        decision_weights default
+        move_weights stay_close
+
+        fallback_advances_pattern true
+        stun_advances_pattern true
+    }
+}

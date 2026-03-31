@@ -223,7 +223,7 @@
 		rare_elite_buffs 20
 	}
 }
-8 { //+7 difficulty, only accessible if you limit break difficulty by setting it to max and then equipping multiple of the quest item that makes you play on +1 difficulty
+8 { 
 	boss_health_multiplier 7
 	boss_elite_buffs 20
 	bonus_itemroll_luck 2000
@@ -251,4 +251,199 @@
 		rare_elite_buffs 25
 	}
 }
+9 { 
+	boss_health_multiplier 8
+	boss_elite_buffs 25
+	bonus_itemroll_luck 2500
+	coins_multiplier 25
+	food_multiplier 25
+	wallet_size 999
+	event_difficulty 25
+	
+	easy {
+		elite_budget 999
+		champ_budget 999
+		elite_chance_mini 2
+		champ_chance_mini 2
 
+		elite_buffs 20
+		rare_elite_buffs 25
+	}
+	hard {
+		elite_budget 999
+		champ_budget 999
+		elite_chance_mini 2 //chance for maggots, fleas, etc to become elites
+		champ_chance_mini 2 //chance for maggots, fleas, etc to become champs
+		
+		elite_buffs 20
+		rare_elite_buffs 25
+	}
+}
+10 { 
+	boss_health_multiplier 9
+	boss_elite_buffs 30
+	bonus_itemroll_luck 3000
+	coins_multiplier 30
+	food_multiplier 30
+	wallet_size 9999
+	event_difficulty 30
+	
+	easy {
+		elite_budget 999
+		champ_budget 999
+		elite_chance_mini 2
+		champ_chance_mini 2
+
+		elite_buffs 20
+		rare_elite_buffs 25
+	}
+	hard {
+		elite_budget 999
+		champ_budget 999
+		elite_chance_mini 2 //chance for maggots, fleas, etc to become elites
+		champ_chance_mini 2 //chance for maggots, fleas, etc to become champs
+		
+		elite_buffs 20
+		rare_elite_buffs 25
+	}
+}
+11 { 
+	boss_health_multiplier 10
+	boss_elite_buffs 35
+	bonus_itemroll_luck 3000
+	coins_multiplier 35
+	food_multiplier 35
+	wallet_size 9999
+	event_difficulty 35
+	
+	easy {
+		elite_budget 999
+		champ_budget 999
+		elite_chance_mini 2
+		champ_chance_mini 2
+
+		elite_buffs 20
+		rare_elite_buffs 25
+	}
+	hard {
+		elite_budget 999
+		champ_budget 999
+		elite_chance_mini 2 //chance for maggots, fleas, etc to become elites
+		champ_chance_mini 2 //chance for maggots, fleas, etc to become champs
+		
+		elite_buffs 20
+		rare_elite_buffs 25
+	}
+}
+12 { 
+	boss_health_multiplier 11
+	boss_elite_buffs 40
+	bonus_itemroll_luck 4000
+	coins_multiplier 40
+	food_multiplier 40
+	wallet_size 9999
+	event_difficulty 40
+	
+	easy {
+		elite_budget 9999
+		champ_budget 9999
+		elite_chance_mini 4
+		champ_chance_mini 4
+
+		elite_buffs 30
+		rare_elite_buffs 40
+	}
+	hard {
+		elite_budget 9999
+		champ_budget 9999
+		elite_chance_mini 6//chance for maggots, fleas, etc to become elites
+		champ_chance_mini 6 //chance for maggots, fleas, etc to become champs
+		
+		elite_buffs 40
+		rare_elite_buffs 50
+	}
+}
+13 { 
+	boss_health_multiplier 12
+	boss_elite_buffs 45
+	bonus_itemroll_luck 5000
+	coins_multiplier 45
+	food_multiplier 45
+	wallet_size 9999
+	event_difficulty 45
+	
+	easy {
+		elite_budget 9999
+		champ_budget 9999
+		elite_chance_mini 4
+		champ_chance_mini 4
+
+		elite_buffs 30
+		rare_elite_buffs 40
+	}
+	hard {
+		elite_budget 9999
+		champ_budget 9999
+		elite_chance_mini 6//chance for maggots, fleas, etc to become elites
+		champ_chance_mini 6 //chance for maggots, fleas, etc to become champs
+		
+		elite_buffs 40
+		rare_elite_buffs 50
+	}
+}
+14 { 
+	boss_health_multiplier 13
+	boss_elite_buffs 50
+	bonus_itemroll_luck 6000
+	coins_multiplier 50
+	food_multiplier 50
+	wallet_size 9999
+	event_difficulty 50
+	
+	easy {
+		elite_budget 9999
+		champ_budget 9999
+		elite_chance_mini 4
+		champ_chance_mini 4
+
+		elite_buffs 30
+		rare_elite_buffs 40
+	}
+	hard {
+		elite_budget 9999
+		champ_budget 9999
+		elite_chance_mini 6//chance for maggots, fleas, etc to become elites
+		champ_chance_mini 6 //chance for maggots, fleas, etc to become champs
+		
+		elite_buffs 40
+		rare_elite_buffs 50
+	}
+}
+15 { 
+	boss_health_multiplier 15
+	boss_elite_buffs 55
+	bonus_itemroll_luck 6500
+	coins_multiplier 55
+	food_multiplier 55
+	wallet_size 9999
+	event_difficulty 55
+	
+	easy {
+		elite_budget 9999
+		champ_budget 9999
+		elite_chance_mini 4
+		champ_chance_mini 4
+
+		elite_buffs 30
+		rare_elite_buffs 40
+	}
+	hard {
+		elite_budget 9999
+		champ_budget 9999
+		elite_chance_mini 6//chance for maggots, fleas, etc to become elites
+		champ_chance_mini 6 //chance for maggots, fleas, etc to become champs
+		
+		elite_buffs 40
+		rare_elite_buffs 50
+	}
+}

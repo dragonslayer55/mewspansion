@@ -1651,9 +1651,11 @@ Swordsman.merge {
     ability_groups {
         attack [
             FlyingSlash
+            Gash
         ]
         defense [
             ShearingSwing
+            KTower 
         ]
         move [
             DashSlash
@@ -1666,6 +1668,10 @@ Swordsman.merge {
     passive_pool [
         Ready
         Sharpen
+        Blunt
+        Phantom
+        Bloodthirsty
+        Armored
     ]
 
     stat_mods {

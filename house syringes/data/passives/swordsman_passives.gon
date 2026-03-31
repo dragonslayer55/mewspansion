@@ -76,3 +76,93 @@ Blunt {
         }
     }
 }
+
+Phantom {
+    name "Phantom"
+    desc "Spawn a shadow copy at the start of battle. They disapear after 3 turns"
+    class Swordsman
+
+    1 {
+
+        passives {
+            SpawnCatCopyOnBattleStart {
+                object PlayerCat_Shade_doomed
+			    prevent_chain_tag minime_clone
+
+                clone_items true
+
+                additional_passives {
+                    SafeDoomed 3
+                    InjuryImmunity 1
+                }
+            }
+        }
+        
+    }
+    2 {
+        desc "Spawn a shadow copy at the start of battle."
+        passives {
+            SpawnCatCopyOnBattleStart {
+                object PlayerCat_Shade
+			    prevent_chain_tag minime_clone
+
+                clone_items true
+
+                additional_passives {
+                    InjuryImmunity 1
+                }
+            }
+        }
+    }
+}
+
+Bloodthirsty {
+    name "Blood thirsty"
+    desc "earn a random stat up every time you kill a unit and a ai controlled bonus turn for each bleeding unit"
+    class Swordsman
+
+    1 {
+
+        passives {
+            StatusOnKill {
+                RandomStatUp 1
+            }
+            SharkySmellsBlood 1
+        }
+        
+    }
+    2 {
+        desc "earn an all stat up every time you kill a unit and 2 ai controlled bonus turns for each bleeding unit"
+        passives {
+            StatusOnKill {
+                AllStatUp 1
+            }
+            SharkySmellsBlood 2
+        }
+    }
+}
+
+Armored {
+    name "Armored"
+    desc "every thime you take damage you have a chance to gain 3 shield. start with 10 shield"
+    class Swordsman
+
+    1 {
+        shield 10
+        passives {
+            StatusOnTookDamage {
+            Shield [3, .33]
+            }
+        }
+        
+    }
+    2 {
+        desc "every thime you take damage you have a chance to gain 5 shield. start with 20 shield"
+        shield 20
+        passives {
+            StatusOnTookDamage {
+            Shield [5, .5]
+            }
+        }
+    }
+}

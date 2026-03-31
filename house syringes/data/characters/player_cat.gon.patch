@@ -56,11 +56,40 @@ PlayerCat {
     }
 
     passives {
+        FormChanger {
+            default{
+            }
+            Possessing {
+                animation_suffix "Possessing"
 
+                turns {
+                    takes_turns true
+                }
+
+                passives {
+                    SurviveAt1HP 1
+                    StatusEachTurnBegin {
+                        ConjureBonusAbility PlayerReturn
+                    }
+                    StatusEachTurnEnd {
+                        ConjureBonusAbility PlayerReturn
+                    }
+                }
+
+            }
+        }
     }
     
     ai {
         brain PlayerBrain
+
+        virtual_abilities {
+            Escape {
+                ability DybbukEscape
+                move_weights keep_distance_always_move
+            }
+        }
+
         decision_weights default
         move_weights keep_distance
     }
@@ -359,5 +388,26 @@ PlayerCat_Buffed {
     passives {
         AllStatsUp 3
         FadeInsteadOfDie 1
+    }
+}
+
+PlayerCat_Shade_doomed {
+    variant_of PlayerCat
+
+    graphics {
+        tint [0 0 0 1]
+    }
+
+    properties {
+        corpse_health 0
+        can_grant_extra_turns false
+    }
+
+    passives {
+        FadeInsteadOfDie 1
+        StatusOnBattleStart {
+
+            SafeDoomed 3
+        }
     }
 }

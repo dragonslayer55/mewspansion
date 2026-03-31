@@ -1338,3 +1338,16 @@ Tina {
         ConjureBonusAbility TinaSuckCat
     }
 }
+
+DrFetus {
+    name "Dr Fetus"
+    desc "your shots are explosions of random size and damage. You have explosion immunity"
+    pieces_required 3
+    override_basic_attack AdvancedExplosiveShot
+
+    passives {
+        ExplosionImmunity 1
+        ReplaceBasicAttack AdvancedExplosiveShot
+
+    }
+}

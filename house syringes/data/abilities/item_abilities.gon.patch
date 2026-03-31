@@ -9932,3 +9932,18 @@ wp_Sniper2 {
         }
     }
 }
+
+Coincheck {
+    variant_of wp_MoneyBag
+    meta {
+        icon_damage_display_eq item_aux
+    }
+
+    target {
+        target_mode none
+        max_range 0
+    }
+    damage_instance {
+        damage durability
+    }
+}
